@@ -46,13 +46,6 @@ A **₹0/month** decentralized ecosystem offering:
 
 ---
 
-## 🎥 Demo Video
-
-> *(Upload hone ke baad link yahan add karein)*
-> `https://youtu.be/<your-video-id>`
-
----
-
 ## 📁 Prototype Files
 
 - `index.html` — Landing page (problem, solution, 3 platforms, tech stack, impact)
