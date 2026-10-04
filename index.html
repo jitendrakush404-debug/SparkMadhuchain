@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MadhuChain - Blockchain Honey Traceability System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@300;400;600;700;900&family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #FFA500 0%, #FF6347 100%);
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-bg {
+            background: linear-gradient(135deg, #FFA500 0%, #FF6347 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: bgMove 50s linear infinite;
+        }
+
+        @keyframes bgMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .tech-icon {
+            transition: transform 0.3s;
+        }
+
+        .tech-icon:hover {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #FFA500 0%, #FF6347 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .emoji {
+            font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <span class="text-5xl emoji">&#x1F36F;</span>
+                    <div>
+                        <h1 class="text-2xl font-bold gradient-text">MadhuChain</h1>
+                        <p class="text-xs text-gray-600">Blockchain Honey Traceability</p>
+                    </div>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#home" class="text-gray-700 hover:text-orange-600 font-semibold transition">Home</a>
+                    <a href="#features" class="text-gray-700 hover:text-orange-600 font-semibold transition">Features</a>
+                    <a href="#platforms" class="text-gray-700 hover:text-orange-600 font-semibold transition">Platforms</a>
+                    <a href="#tech" class="text-gray-700 hover:text-orange-600 font-semibold transition">Technology</a>
+                    <a href="#about" class="text-gray-700 hover:text-orange-600 font-semibold transition">About</a>
+                </div>
+
+                <a href="#platforms" class="hidden md:block bg-orange-500 text-white px-6 py-2 rounded-full font-bold hover:bg-orange-600 transition">
+                    Get Started
+                </a>
+
+                <button class="md:hidden text-3xl emoji" onclick="toggleMobileMenu()" aria-label="Open menu">&#x2630;</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-white border-t">
+        <div class="container mx-auto px-4 py-4 space-y-3">
+            <a href="#home" class="block text-gray-700 hover:text-orange-600 font-semibold">Home</a>
+            <a href="#features" class="block text-gray-700 hover:text-orange-600 font-semibold">Features</a>
+            <a href="#platforms" class="block text-gray-700 hover:text-orange-600 font-semibold">Platforms</a>
+            <a href="#tech" class="block text-gray-700 hover:text-orange-600 font-semibold">Technology</a>
+            <a href="#about" class="block text-gray-700 hover:text-orange-600 font-semibold">About</a>
+            <a href="#platforms" class="block bg-orange-500 text-white px-6 py-2 rounded-full font-bold text-center hover:bg-orange-600">Get Started</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg text-white py-32 mt-20 relative">
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <div class="mb-8 float-animation">
+                <span class="text-8xl emoji">&#x1F36F;</span>
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                असली शहद की पहचान<br/>
+                <span class="text-4xl md:text-5xl">MadhuChain - Blockchain Honey Traceability</span>
+            </h1>
+
+            <p class="text-xl md:text-2xl mb-8 max-w-4xl mx-auto opacity-90">
+                Blockchain + AI + IoT Based Complete Honey Traceability System
+            </p>
+
+            <div class="flex flex-col md:flex-row justify-center gap-4 mb-12">
+                <a href="#platforms" class="bg-white text-orange-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-yellow-100 transition transform hover:scale-105 shadow-lg">
+                    Explore Platforms &#x1F680;
+                </a>
+                <a href="#about" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-orange-600 transition transform hover:scale-105">
+                    Learn More
+                </a>
+            </div>
+
+            <!-- Project Badge -->
+            <div class="inline-block bg-white bg-opacity-20 backdrop-blur-lg rounded-lg px-6 py-4">
+                <p class="text-sm font-semibold mb-1">Smart India Hackathon 2026</p>
+                <p class="text-xs opacity-90">PS ID: 26021 | Ministry of MSME | Team: Spark Innovator</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-4xl font-bold mb-6 gradient-text">The Problem</h2>
+
+                <p class="text-lg text-gray-700 mb-8">
+                    KVIC's Honey Mission faces critical challenges that affect both farmers and consumers
+                </p>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg text-left">
+                        <h3 class="font-bold text-red-800 mb-2 flex items-center">
+                            <span class="text-2xl mr-2 emoji">&#x1F6AB;</span> Fake honey flooding the market
+                        </h3>
+                        <p class="text-gray-700 text-sm">Destroying consumer trust</p>
+                    </div>
+
+                    <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg text-left">
+                        <h3 class="font-bold text-red-800 mb-2 flex items-center">
+                            <span class="text-2xl mr-2 emoji">&#x274C;</span> Low Consumer Trust
+                        </h3>
+                        <p class="text-gray-700 text-sm">No way to verify authenticity</p>
+                    </div>
+
+                    <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg text-left">
+                        <h3 class="font-bold text-red-800 mb-2 flex items-center">
+                            <span class="text-2xl mr-2 emoji">&#x1F4CB;</span> Weak Market Linkages
+                        </h3>
+                        <p class="text-gray-700 text-sm">Farmers struggle to reach customers directly</p>
+                    </div>
+
+                    <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg text-left">
+                        <h3 class="font-bold text-red-800 mb-2 flex items-center">
+                            <span class="text-2xl mr-2 emoji">&#x1F50D;</span> No Traceability
+                        </h3>
+                        <p class="text-gray-700 text-sm">Impossible to track honey from farm to table</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Overview -->
+    <section class="py-16 bg-gradient-to-br from-orange-50 to-yellow-50">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-6 gradient-text">Our Solution</h2>
+
+            <p class="text-lg text-gray-700 mb-12 max-w-3xl mx-auto">
+                An integrated Blockchain + AI + IoT digital ecosystem that revolutionizes honey traceability
+            </p>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-8 card-hover">
+                    <div class="text-6xl mb-4 emoji">&#x26D3;&#xFE0F;</div>
+                    <h3 class="text-2xl font-bold mb-3">Blockchain</h3>
+                    <p class="text-gray-600">Immutable records using Hyperledger Fabric for complete transparency</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-8 card-hover">
+                    <div class="text-6xl mb-4 emoji">&#x1F916;</div>
+                    <h3 class="text-2xl font-bold mb-3">AI Powered</h3>
+                    <p class="text-gray-600">Gemini AI assists farmers with beekeeping in Hindi, English, and Hinglish</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-8 card-hover">
+                    <div class="text-6xl mb-4 emoji">&#x1F4F6;</div>
+                    <h3 class="text-2xl font-bold mb-3">IoT Integration</h3>
+                    <p class="text-gray-600">Real-time environmental data for hive monitoring</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Three Platforms -->
+    <section id="platforms" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 gradient-text">Our Three Platforms</h2>
+                <p class="text-lg text-gray-600">Complete ecosystem for farmers, customers, and administrators</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+
+                <!-- Platform 1: Farmer Bot -->
+                <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl shadow-2xl overflow-hidden card-hover">
+                    <div class="bg-gradient-to-r from-green-500 to-green-600 text-white p-6 text-center">
+                        <div class="text-7xl mb-3 emoji">&#x1F468;&#x200D;&#x1F33E;&#x1F36F;&#x1F41D;&#x1F4F1;&#x2705;</div>
+                        <h3 class="text-2xl font-bold">Farmer Bot</h3>
+                        <p class="text-sm opacity-90 mt-2">Telegram Bot Interface</p>
+                    </div>
+
+                    <div class="p-6">
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-center space-x-2">
+                                <span class="text-green-600 text-xl">&#x2713;</span>
+                                <span class="text-sm">AI-powered assistance</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-green-600 text-xl">&#x2713;</span>
+                                <span class="text-sm">QR Code generation</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-green-600 text-xl">&#x2713;</span>
+                                <span class="text-sm">Hindi, English, Hinglish support</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-green-600 text-xl">&#x2713;</span>
+                                <span class="text-sm">Real-time hive monitoring</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-green-600 text-xl">&#x2713;</span>
+                                <span class="text-sm">Bee Credits reward system</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-green-600 text-xl">&#x2713;</span>
+                                <span class="text-sm">24/7 query support</span>
+                            </li>
+                        </ul>
+
+                        <a href="farmer-bot.html" class="block w-full bg-green-600 text-white text-center py-3 rounded-lg font-bold hover:bg-green-700 transition transform hover:scale-105">
+                            Open Farmer Bot &#x27A1;
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Platform 2: Customer App -->
+                <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl shadow-2xl overflow-hidden card-hover">
+                    <div class="bg-gradient-to-r from-orange-500 to-red-500 text-white p-6 text-center">
+                        <div class="text-7xl mb-3 emoji">&#x1F4F1;&#x1F50D;</div>
+                        <h3 class="text-2xl font-bold">Customer App</h3>
+                        <p class="text-sm opacity-90 mt-2">Honey Verification</p>
+                    </div>
+
+                    <div class="p-6">
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-center space-x-2">
+                                <span class="text-orange-600 text-xl">&#x2713;</span>
+                                <span class="text-sm">QR Code scanning</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-orange-600 text-xl">&#x2713;</span>
+                                <span class="text-sm">6-digit security verification</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-orange-600 text-xl">&#x2713;</span>
+                                <span class="text-sm">Complete farmer details</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-orange-600 text-xl">&#x2713;</span>
+                                <span class="text-sm">Blockchain verification</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-orange-600 text-xl">&#x2713;</span>
+                                <span class="text-sm">Instant Cashback</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-orange-600 text-xl">&#x2713;</span>
+                                <span class="text-sm">Health benefits info</span>
+                            </li>
+                        </ul>
+
+                        <a href="customer-app.html" class="block w-full bg-orange-600 text-white text-center py-3 rounded-lg font-bold hover:bg-orange-700 transition transform hover:scale-105">
+                            Open Customer App &#x27A1;
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Platform 3: Admin Panel -->
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl shadow-2xl overflow-hidden card-hover">
+                    <div class="bg-gradient-to-r from-purple-500 to-purple-600 text-white p-6 text-center">
+                        <div class="text-7xl mb-3 emoji">&#x1F5A5;&#xFE0F;&#x1F4CA;</div>
+                        <h3 class="text-2xl font-bold">Admin Panel</h3>
+                        <p class="text-sm opacity-90 mt-2">Complete Control</p>
+                    </div>
+
+                    <div class="p-6">
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-center space-x-2">
+                                <span class="text-purple-600 text-xl">&#x2713;</span>
+                                <span class="text-sm">Farmer management</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-purple-600 text-xl">&#x2713;</span>
+                                <span class="text-sm">Customer analytics</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-purple-600 text-xl">&#x2713;</span>
+                                <span class="text-sm">Honey batches tracking</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-purple-600 text-xl">&#x2713;</span>
+                                <span class="text-sm">Blockchain monitor</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-purple-600 text-xl">&#x2713;</span>
+                                <span class="text-sm">Bot management</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-purple-600 text-xl">&#x2713;</span>
+                                <span class="text-sm">Financial reports</span>
+                            </li>
+                        </ul>
+
+                        <a href="admin-dashboard.html" class="block w-full bg-purple-600 text-white text-center py-3 rounded-lg font-bold hover:bg-purple-700 transition transform hover:scale-105">
+                            Open Admin Panel &#x27A1;
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Features -->
+    <section id="features" class="py-16 bg-gradient-to-br from-blue-50 to-purple-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 gradient-text">Key Features</h2>
+                <p class="text-lg text-gray-600">What makes MadhuChain unique and powerful</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <div class="text-5xl mb-4 emoji">&#x1F512;&#x26D3;&#xFE0F;</div>
+                    <h3 class="text-xl font-bold mb-2">Tamper-Proof Records</h3>
+                    <p class="text-gray-600">Blockchain ensures immutable and transparent honey journey tracking</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <div class="text-5xl mb-4 emoji">&#x1F4F1;&#x1F50D;</div>
+                    <h3 class="text-xl font-bold mb-2">QR + 6-Digit Security</h3>
+                    <p class="text-gray-600">Dual verification system prevents counterfeit products</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <div class="text-5xl mb-4 emoji">&#x1F4B0;&#x2728;</div>
+                    <h3 class="text-xl font-bold mb-2">Instant Cashback</h3>
+                    <p class="text-gray-600">Customers get instant cashback on every verification</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <div class="text-5xl mb-4 emoji">&#x1F41D;&#x2B50;</div>
+                    <h3 class="text-xl font-bold mb-2">Bee Credits System</h3>
+                    <p class="text-gray-600">Farmers earn credits for verified sales and quality ratings</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <div class="text-5xl mb-4 emoji">&#x1F30D;&#x1F4F1;</div>
+                    <h3 class="text-xl font-bold mb-2">Multi-Language Support</h3>
+                    <p class="text-gray-600">Hindi, English, and Hinglish for rural accessibility</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <div class="text-5xl mb-4 emoji">&#x1F4CA;&#x1F4C8;</div>
+                    <h3 class="text-xl font-bold mb-2">Real-Time Analytics</h3>
+                    <p class="text-gray-600">Live production data and market insights for farmers</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Stack -->
+    <section id="tech" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 gradient-text">Technology Stack</h2>
+                <p class="text-lg text-gray-600">Powered by cutting-edge technologies</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-gray-50 rounded-lg p-6 text-center card-hover">
+                    <div class="text-6xl mb-3 tech-icon emoji">&#x26D3;&#xFE0F;</div>
+                    <h3 class="font-bold text-lg mb-2">Blockchain</h3>
+                    <p class="text-sm text-gray-600">Hyperledger Fabric</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-lg p-6 text-center card-hover">
+                    <div class="text-6xl mb-3 tech-icon emoji">&#x1F916;&#x2728;</div>
+                    <h3 class="font-bold text-lg mb-2">AI Engine</h3>
+                    <p class="text-sm text-gray-600">Google Gemini API</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-lg p-6 text-center card-hover">
+                    <div class="text-6xl mb-3 tech-icon emoji">&#x1F4E8;&#x1F4AC;</div>
+                    <h3 class="font-bold text-lg mb-2">Messaging</h3>
+                    <p class="text-sm text-gray-600">Telegram Bot API</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-lg p-6 text-center card-hover">
+                    <div class="text-6xl mb-3 tech-icon emoji">&#x1F5C4;&#xFE0F;&#x1F4BE;</div>
+                    <h3 class="font-bold text-lg mb-2">Database</h3>
+                    <p class="text-sm text-gray-600">Supabase (PostgreSQL)</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-lg p-6 text-center card-hover">
+                    <div class="text-6xl mb-3 tech-icon emoji">&#x1F310;&#x1F4C1;</div>
+                    <h3 class="font-bold text-lg mb-2">Data Storage</h3>
+                    <p class="text-sm text-gray-600">IPFS</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-lg p-6 text-center card-hover">
+                    <div class="text-6xl mb-3 tech-icon emoji">&#x26A1;&#x1F5A5;&#xFE0F;</div>
+                    <h3 class="font-bold text-lg mb-2">Backend</h3>
+                    <p class="text-sm text-gray-600">Node.js + Express</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-lg p-6 text-center card-hover">
+                    <div class="text-6xl mb-3 tech-icon emoji">&#x1F3A8;&#x1F4BB;</div>
+                    <h3 class="font-bold text-lg mb-2">Frontend</h3>
+                    <p class="text-sm text-gray-600">HTML + Tailwind CSS</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-lg p-6 text-center card-hover">
+                    <div class="text-6xl mb-3 tech-icon emoji">&#x2601;&#xFE0F;&#x1F680;</div>
+                    <h3 class="font-bold text-lg mb-2">Hosting</h3>
+                    <p class="text-sm text-gray-600">GitHub Pages</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact & Stats -->
+    <section class="py-20 gradient-bg text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Our Impact</h2>
+                <p class="text-xl opacity-90">Making a difference</p>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-8 text-center">
+                <div class="card-hover">
+                    <div class="text-6xl font-bold mb-2">450+</div>
+                    <div class="text-xl opacity-90">Registered Farmers</div>
+                </div>
+
+                <div class="card-hover">
+                    <div class="text-6xl font-bold mb-2">1,240+</div>
+                    <div class="text-xl opacity-90">QR Codes Generated</div>
+                </div>
+
+                <div class="card-hover">
+                    <div class="text-6xl font-bold mb-2">980+</div>
+                    <div class="text-xl opacity-90">Verified Products</div>
+                </div>
+
+                <div class="card-hover">
+                    <div class="text-6xl font-bold mb-2">&#x20B9;19,600</div>
+                    <div class="text-xl opacity-90">Cashback Distributed</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About / Team -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4 gradient-text">About MadhuChain</h2>
+                    <p class="text-lg text-gray-600">Revolutionizing honey traceability with blockchain technology</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-2xl shadow-xl p-8 mb-8">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center">
+                        <span class="emoji mr-2">&#x1F3AF;&#x1F31F;</span> Our Mission
+                    </h3>
+                    <p class="text-gray-700 mb-4">
+                        To create a transparent, trustworthy, and efficient honey supply chain that benefits both farmers and consumers while eliminating counterfeit products from the market.
+                    </p>
+                    <p class="text-gray-700">
+                        By leveraging blockchain technology, AI, and IoT, we're building a future where every drop of honey can be traced back to its origin, ensuring authenticity and fair compensation for beekeepers.
+                    </p>
+                </div>
+
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-3 flex items-center">
+                        <span class="text-3xl mr-2 emoji">&#x1F3C6;&#x1F4CB;</span> Competition Details
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <p class="text-sm text-gray-600 mb-1">Competition</p>
+                            <p class="font-bold text-lg">Smart India Hackathon 2026</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600 mb-1">Problem Statement ID</p>
+                            <p class="font-bold text-lg">PS ID: 26021 | MSME</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600 mb-1">Ministry</p>
+                            <p class="font-bold text-lg">MSME (KVIC)</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600 mb-1">Category</p>
+                            <p class="font-bold text-lg">Agriculture, FoodTech</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600 mb-1">Team Name</p>
+                            <p class="font-bold text-lg">Spark Innovator</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600 mb-1">Type</p>
+                            <p class="font-bold text-lg">Software</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <span class="text-5xl emoji">&#x1F36F;</span>
+                        <div>
+                            <h3 class="text-2xl font-bold">MadhuChain</h3>
+                            <p class="text-sm text-gray-400">Blockchain Honey Traceability</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4">
+                        An integrated Blockchain + AI + IoT based digital ecosystem for honey authenticity, traceability, and market credibility improvement.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#features" class="text-gray-400 hover:text-white transition">Features</a></li>
+                        <li><a href="#platforms" class="text-gray-400 hover:text-white transition">Platforms</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition">About</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li>Email: support@madhuchain.in</li>
+                        <li>Phone: 1800-XXX-XXXX</li>
+                        <li>Ministry: MSME (KVIC)</li>
+                        <li>SIH 2026 - PS ID: 26021</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center">
+                <p class="text-sm text-gray-400">
+                    &copy; 2026 MadhuChain - Team Spark Innovator | Smart India Hackathon 2026 | Powered by Blockchain, AI &amp; IoT
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button onclick="scrollToTop()" id="scrollBtn"
+        class="fixed bottom-8 right-8 bg-orange-500 text-white w-12 h-12 rounded-full shadow-lg hover:bg-orange-600 transition transform hover:scale-110 hidden text-xl">
+        &#x2191;
+    </button>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.addEventListener('scroll', () => {
+            const scrollBtn = document.getElementById('scrollBtn');
+            if (window.scrollY > 300) {
+                scrollBtn.classList.remove('hidden');
+            } else {
+                scrollBtn.classList.add('hidden');
+            }
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                document.getElementById('mobileMenu').classList.add('hidden');
+            });
+        });
+    </script>
+
+</body>
+</html>
