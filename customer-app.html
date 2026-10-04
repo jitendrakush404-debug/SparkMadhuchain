@@ -10,59 +10,30 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@300;400;600;700;900&family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
 <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-        font-family: 'Noto Sans Devanagari', 'Poppins', sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
-
-    .screen { display: none; }
-    .screen.active { display: block; }
-
-    .gradient-bg { background: linear-gradient(135deg, #FFA500 0%, #FF6347 100%); }
-
-    .card-hover { transition: all 0.3s ease; }
-    .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-
-    .pulse-dot { animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.5; } }
-
-    .scanner-frame {
-        position: relative; width: 100%; max-width: 400px;
-        aspect-ratio: 1; margin: 0 auto;
-    }
-    .scanner-border {
-        position: absolute; width: 80%; height: 80%;
-        top: 10%; left: 10%;
-        border: 3px solid #FFA500; border-radius: 20px;
-        animation: pulse 2s infinite;
-    }
-    .corner { position: absolute; width: 40px; height: 40px; border: 4px solid #FFA500; }
-    .corner.top-left    { top:5%;    left:5%;  border-right:none; border-bottom:none; }
-    .corner.top-right   { top:5%;    right:5%; border-left:none;  border-bottom:none; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Noto Sans Devanagari','Poppins',sans-serif; -webkit-font-smoothing:antialiased; }
+    .screen { display:none; }
+    .screen.active { display:block; }
+    .gradient-bg { background:linear-gradient(135deg,#FFA500 0%,#FF6347 100%); }
+    .card-hover { transition:all 0.3s ease; }
+    .card-hover:hover { transform:translateY(-5px); box-shadow:0 20px 40px rgba(0,0,0,0.1); }
+    .pulse-dot { animation:pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.5;} }
+    .scanner-frame { position:relative; width:100%; max-width:400px; aspect-ratio:1; margin:0 auto; }
+    .scanner-border { position:absolute; width:80%; height:80%; top:10%; left:10%; border:3px solid #FFA500; border-radius:20px; animation:pulse 2s infinite; }
+    .corner { position:absolute; width:40px; height:40px; border:4px solid #FFA500; }
+    .corner.top-left    { top:5%; left:5%;  border-right:none; border-bottom:none; }
+    .corner.top-right   { top:5%; right:5%; border-left:none;  border-bottom:none; }
     .corner.bottom-left { bottom:5%; left:5%;  border-right:none; border-top:none; }
     .corner.bottom-right{ bottom:5%; right:5%; border-left:none;  border-top:none; }
-
-    .code-input {
-        width: 50px; height: 60px; font-size: 24px;
-        text-align: center; border: 2px solid #ddd;
-        border-radius: 8px; font-weight: bold;
-    }
-    .code-input:focus {
-        outline: none; border-color: #FFA500;
-        box-shadow: 0 0 0 3px rgba(255,165,0,0.1);
-    }
-
-    .emoji {
-        font-family: "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;
-    }
+    .code-input { width:50px; height:60px; font-size:24px; text-align:center; border:2px solid #ddd; border-radius:8px; font-weight:bold; text-transform:uppercase; }
+    .code-input:focus { outline:none; border-color:#FFA500; box-shadow:0 0 0 3px rgba(255,165,0,0.1); }
+    .emoji { font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif; }
 </style>
 </head>
 <body class="bg-gray-50">
 
-<!-- Top Navigation Bar -->
+<!-- Top Nav -->
 <nav class="gradient-bg text-white py-4 shadow-lg sticky top-0 z-50" id="topNav">
     <div class="container mx-auto px-4 flex justify-between items-center">
         <div class="flex items-center space-x-2">
@@ -71,15 +42,9 @@
             <h1 class="text-xl font-bold" id="screenTitle">MadhuChain</h1>
         </div>
         <div class="flex items-center space-x-4">
-            <button class="hover:scale-110 transition" onclick="showScreen('home')">
-                <span class="text-2xl emoji">&#x1F3E0;</span>
-            </button>
-            <button class="hover:scale-110 transition" onclick="showScreen('scan')">
-                <span class="text-2xl emoji">&#x1F4F7;</span>
-            </button>
-            <button class="hover:scale-110 transition" onclick="showScreen('profile')">
-                <span class="text-2xl emoji">&#x1F464;</span>
-            </button>
+            <button onclick="showScreen('home')"><span class="text-2xl emoji">&#x1F3E0;</span></button>
+            <button onclick="showScreen('scan')"><span class="text-2xl emoji">&#x1F4F7;</span></button>
+            <button onclick="showScreen('profile')"><span class="text-2xl emoji">&#x1F464;</span></button>
         </div>
     </div>
 </nav>
@@ -105,7 +70,7 @@
             </div>
         </section>
 
-        <!-- Popular Honey Regions -->
+        <!-- Honey Regions -->
         <section class="py-8 bg-white">
             <div class="container mx-auto px-4">
                 <h3 class="text-2xl font-bold mb-6 text-center">
@@ -113,24 +78,24 @@
                 </h3>
                 <div class="grid grid-cols-2 gap-4">
                     <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 shadow card-hover cursor-pointer">
-                        <div class="text-3xl mb-2 emoji">&#x1F3D4;&#xFE0F;</div>
-                        <h4 class="font-bold text-lg">Kashmir</h4>
-                        <p class="text-gray-600 text-sm">450 Registered Farmers</p>
+                        <div class="text-3xl mb-2 emoji">&#x1F9C4;</div>
+                        <h4 class="font-bold text-lg">Mathura, UP</h4>
+                        <p class="text-gray-600 text-sm">Multiflora Honey</p>
                     </div>
                     <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-4 shadow card-hover cursor-pointer">
-                        <div class="text-3xl mb-2 emoji">&#x1F335;</div>
+                        <div class="text-3xl mb-2 emoji">&#x1F33C;</div>
                         <h4 class="font-bold text-lg">Rajasthan</h4>
-                        <p class="text-gray-600 text-sm">320 Registered Farmers</p>
+                        <p class="text-gray-600 text-sm">Sarson (Mustard) Honey</p>
                     </div>
                     <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg p-4 shadow card-hover cursor-pointer">
-                        <div class="text-3xl mb-2 emoji">&#x1F33E;</div>
-                        <h4 class="font-bold text-lg">Bihar</h4>
-                        <p class="text-gray-600 text-sm">280 Registered Farmers</p>
+                        <div class="text-3xl mb-2 emoji">&#x1F333;</div>
+                        <h4 class="font-bold text-lg">Uttarakhand</h4>
+                        <p class="text-gray-600 text-sm">Neem Honey</p>
                     </div>
                     <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4 shadow card-hover cursor-pointer">
-                        <div class="text-3xl mb-2 emoji">&#x1F33F;</div>
-                        <h4 class="font-bold text-lg">Uttarakhand</h4>
-                        <p class="text-gray-600 text-sm">190 Registered Farmers</p>
+                        <div class="text-3xl mb-2 emoji">&#x1F33A;</div>
+                        <h4 class="font-bold text-lg">Himachal Pradesh</h4>
+                        <p class="text-gray-600 text-sm">Apple Blossom Honey</p>
                     </div>
                 </div>
             </div>
@@ -168,19 +133,15 @@
                         <div class="corner bottom-right"></div>
                     </div>
                 </div>
-
                 <div class="text-center mb-8">
                     <button class="bg-orange-500 text-white px-8 py-3 rounded-full font-semibold text-lg hover:bg-orange-600 transition transform hover:scale-105"
                         onclick="simulateScan()">
                         &#x1F4F7; Scan QR Code (Demo)
                     </button>
                 </div>
-
                 <div class="max-w-md mx-auto bg-white rounded-lg p-6">
                     <div class="text-center mb-6">
-                        <p class="text-gray-600 mb-4">
-                            <span class="emoji">&#x1F4A1;</span> Tip: Honey ke dabbe par QR code hoga
-                        </p>
+                        <p class="text-gray-600 mb-4"><span class="emoji">&#x1F4A1;</span> Tip: QR code honey ke dabbe par hoga</p>
                         <div class="flex items-center justify-center my-6">
                             <div class="flex-1 h-px bg-gray-300"></div>
                             <span class="px-4 text-gray-500">OR</span>
@@ -188,9 +149,7 @@
                         </div>
                         <p class="text-gray-700 mb-4">QR Code manually enter karein</p>
                         <input class="w-full border-2 border-gray-300 rounded-lg px-4 py-3 mb-4 focus:outline-none focus:border-orange-500"
-                            id="manualQR"
-                            placeholder="Enter QR Code (e.g., QR-2026-001234)"
-                            type="text"/>
+                            id="manualQR" placeholder="e.g., QR-2026-001234" type="text"/>
                         <button class="w-full bg-orange-500 text-white py-3 rounded-lg font-semibold hover:bg-orange-600"
                             onclick="verifyManualQR()">
                             &#x2705; Verify QR Code
@@ -201,7 +160,7 @@
         </div>
     </div>
 
-    <!-- SCREEN 3: CODE VERIFICATION -->
+    <!-- SCREEN 3: 6-CHARACTER CAP PIN VERIFICATION -->
     <div class="screen" id="verify">
         <div class="container mx-auto px-4 py-8 max-w-md">
             <div class="text-center mb-8">
@@ -212,30 +171,46 @@
 
             <div class="bg-orange-50 border-l-4 border-orange-500 p-4 mb-6">
                 <h3 class="font-bold text-gray-700 mb-2">
-                    <span class="text-2xl mr-3 emoji">&#x1F522;</span> 6-Digit Security Code Daalen
+                    <span class="text-2xl mr-3 emoji">&#x1F522;</span> 6-Character Secret Cap PIN Daalen
                 </h3>
                 <p class="text-gray-600 text-sm">
-                    Yeh code honey ke dabbe ke andar milega
+                    Yeh PIN honey ke dabbe ke andar printed hota hai — cap ke neeche chhupi hui slip par
                 </p>
             </div>
 
+            <!-- PIN Input — text type, alphanumeric -->
             <div class="mb-6">
                 <div class="flex justify-center space-x-2 mb-4" id="codeInputs">
-                    <input class="code-input" id="code0" maxlength="1" oninput="handleInput(0)" onkeydown="handleKeyDown(event,0)" type="text"/>
-                    <input class="code-input" id="code1" maxlength="1" oninput="handleInput(1)" onkeydown="handleKeyDown(event,1)" type="text"/>
-                    <input class="code-input" id="code2" maxlength="1" oninput="handleInput(2)" onkeydown="handleKeyDown(event,2)" type="text"/>
-                    <input class="code-input" id="code3" maxlength="1" oninput="handleInput(3)" onkeydown="handleKeyDown(event,3)" type="text"/>
-                    <input class="code-input" id="code4" maxlength="1" oninput="handleInput(4)" onkeydown="handleKeyDown(event,4)" type="text"/>
-                    <input class="code-input" id="code5" maxlength="1" oninput="handleInput(5)" onkeydown="handleKeyDown(event,5)" type="text"/>
+                    <input class="code-input" id="code0" maxlength="1"
+                        type="text" autocapitalize="characters"
+                        oninput="handleInput(0)" onkeydown="handleKeyDown(event,0)"/>
+                    <input class="code-input" id="code1" maxlength="1"
+                        type="text" autocapitalize="characters"
+                        oninput="handleInput(1)" onkeydown="handleKeyDown(event,1)"/>
+                    <input class="code-input" id="code2" maxlength="1"
+                        type="text" autocapitalize="characters"
+                        oninput="handleInput(2)" onkeydown="handleKeyDown(event,2)"/>
+                    <input class="code-input" id="code3" maxlength="1"
+                        type="text" autocapitalize="characters"
+                        oninput="handleInput(3)" onkeydown="handleKeyDown(event,3)"/>
+                    <input class="code-input" id="code4" maxlength="1"
+                        type="text" autocapitalize="characters"
+                        oninput="handleInput(4)" onkeydown="handleKeyDown(event,4)"/>
+                    <input class="code-input" id="code5" maxlength="1"
+                        type="text" autocapitalize="characters"
+                        oninput="handleInput(5)" onkeydown="handleKeyDown(event,5)"/>
                 </div>
                 <p class="hidden mt-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded text-center" id="errorMsg">
-                    <span class="emoji">&#x274C;</span> Galat Code! Dobara try karein.
+                    <span class="emoji">&#x274C;</span> Galat PIN! Dobara try karein.
+                </p>
+                <p class="hidden mt-4 bg-yellow-100 border border-yellow-400 text-yellow-800 px-4 py-3 rounded text-center" id="usedMsg">
+                    <span class="emoji">&#x26A0;&#xFE0F;</span> Yeh PIN pehle hi use ho chuka hai! Code block kar diya gaya.
                 </p>
             </div>
 
             <button class="w-full bg-orange-500 text-white py-4 rounded-lg font-bold text-lg hover:bg-orange-600 transition disabled:opacity-50"
                 disabled id="verifyBtn" onclick="verifyCode()">
-                &#x2705; Verify Code
+                &#x2705; Verify PIN
             </button>
 
             <div class="mt-8 bg-white rounded-lg shadow p-6">
@@ -243,19 +218,31 @@
                     <span class="mr-2 emoji">&#x2139;&#xFE0F;</span> Instructions
                 </h4>
                 <ul class="text-gray-600 text-sm space-y-2">
-                    <li>&#x2022; Code honey ke dabbe ke andar printed hoga</li>
-                    <li>&#x2022; Code case-sensitive hai — capital letters use karein</li>
-                    <li>&#x2022; Ek code sirf ek baar use ho sakta hai</li>
-                    <li>&#x2022; Code 30 din tak valid rahega</li>
+                    <li>&#x2022; PIN dabbe ke andar — cap ke neeche slip par hoga</li>
+                    <li>&#x2022; 6 characters: letters aur numbers (A-Z, 0-9)</li>
+                    <li>&#x2022; PIN ek baar use hone ke baad auto-disable ho jata hai</li>
+                    <li>&#x2022; 5 galat attempts ke baad code lock ho jata hai</li>
                     <li>&#x2022; Helpline: <a class="text-orange-600 font-semibold" href="tel:1800-XXX-XXXX">1800-XXX-XXXX</a></li>
                 </ul>
             </div>
 
-            <div class="mt-8 text-center">
-                <p class="text-sm text-gray-600">Demo ke liye yeh code use karein:</p>
-                <p class="text-2xl font-mono font-bold mt-2">
-                    A<span class="bg-blue-200 px-3 py-1 rounded">7K9M2</span>
-                </p>
+            <!-- 3 Demo Cases -->
+            <div class="mt-6 bg-blue-50 rounded-lg p-4">
+                <p class="text-sm font-bold text-blue-800 mb-2">&#x1F9EA; Demo PIN Cases:</p>
+                <div class="space-y-2 text-xs">
+                    <div class="flex justify-between">
+                        <span class="text-green-700 font-semibold">&#x2705; Valid PIN:</span>
+                        <span class="font-mono font-bold">A7K9M2</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-red-700 font-semibold">&#x274C; Wrong PIN:</span>
+                        <span class="font-mono font-bold">X1Y2Z3</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-yellow-700 font-semibold">&#x26A0;&#xFE0F; Already Used:</span>
+                        <span class="font-mono font-bold">B3C4D5</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -266,17 +253,18 @@
             <div class="bg-white rounded-lg shadow-lg p-8 mb-6">
                 <div class="text-8xl mb-4 emoji">&#x2705;</div>
                 <h2 class="text-3xl font-bold text-green-600 mb-4">Verification Successful!</h2>
-                <h3 class="text-xl font-bold mb-2">&#x1F36F; Yeh Honey 100% Asli hai!</h3>
+                <h3 class="text-xl font-bold mb-2">&#x1F36F; Yeh Honey 100% Blockchain-Verified Hai!</h3>
             </div>
-
             <div class="bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-lg shadow-lg p-6 mb-6">
-                <h3 class="text-xl font-bold mb-2">
-                    <span class="emoji">&#x1F4B0;</span> Cashback Mila!
-                </h3>
+                <h3 class="text-xl font-bold mb-2"><span class="emoji">&#x1F4B0;</span> Cashback Mila!</h3>
                 <div class="text-5xl font-bold mb-2">&#x20B9;20</div>
                 <div class="text-xl">Aapke wallet me add ho gaya!</div>
             </div>
-
+            <!-- Bee Credits note -->
+            <div class="bg-green-50 border border-green-300 rounded-lg p-4 mb-6 text-sm text-green-800">
+                <span class="emoji">&#x1F41D;</span>
+                Aapki purchase ne <strong>Ramesh Sharma</strong> ke family ko +5 Bee Credits add kar diya!
+            </div>
             <button class="w-full bg-orange-500 text-white py-3 rounded-lg font-semibold hover:bg-orange-600 transition mb-4"
                 onclick="showScreen('farmerProfile')">
                 &#x1F468;&#x200D;&#x1F33E; Farmer Details Dekhen
@@ -295,11 +283,11 @@
             <h2 class="text-2xl font-bold mb-4">
                 <span class="emoji">&#x1F468;&#x200D;&#x1F33E;</span> Farmer Profile
             </h2>
-
             <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
                 <div class="text-center mb-6">
                     <div class="text-6xl mb-3 emoji">&#x1F468;&#x200D;&#x1F33E;</div>
-                    <h3 class="text-xl font-bold mb-4">Rajesh Kumar</h3>
+                    <h3 class="text-xl font-bold mb-4">Ramesh Sharma, 45</h3>
+                    <p class="text-gray-500 text-sm italic mb-4">Beekeeper from Mathura, Uttar Pradesh</p>
                     <div class="grid grid-cols-2 gap-4 mb-4 text-sm">
                         <div class="text-gray-600">
                             <div class="font-semibold">Farmer ID</div>
@@ -307,11 +295,11 @@
                         </div>
                         <div class="text-gray-600">
                             <div class="font-semibold">&#x1F41D; Experience</div>
-                            <div>8 Years</div>
+                            <div>12 Years</div>
                         </div>
                         <div class="text-gray-600">
                             <div class="font-semibold">&#x1F4CD; Location</div>
-                            <div>Pune, Maharashtra</div>
+                            <div>Mathura, Uttar Pradesh</div>
                         </div>
                         <div class="text-gray-600">
                             <div class="font-semibold">&#x2B50; Rating</div>
@@ -319,36 +307,15 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="border-t pt-4">
-                    <h3 class="font-bold mb-2">
-                        <span class="emoji">&#x1F36F;</span> Honey Batch Details
-                    </h3>
+                    <h3 class="font-bold mb-2"><span class="emoji">&#x1F36F;</span> Honey Batch Details</h3>
                     <div class="grid grid-cols-2 gap-4 text-sm">
-                        <div>
-                            <div class="text-gray-600">Honey Type</div>
-                            <div class="font-semibold">Multiflora Honey</div>
-                        </div>
-                        <div>
-                            <div class="text-gray-600">Harvest Date</div>
-                            <div class="font-semibold">15 March 2026</div>
-                        </div>
-                        <div>
-                            <div class="text-gray-600">&#x1F4CD; Origin</div>
-                            <div class="font-semibold">Pune, Maharashtra</div>
-                        </div>
-                        <div>
-                            <div class="text-gray-600">Batch ID</div>
-                            <div class="font-semibold">HNY-2026-001</div>
-                        </div>
-                        <div>
-                            <div class="text-gray-600">Weight</div>
-                            <div class="font-semibold">500g</div>
-                        </div>
-                        <div>
-                            <div class="text-gray-600">Price</div>
-                            <div class="font-semibold">&#x20B9;350</div>
-                        </div>
+                        <div><div class="text-gray-600">Honey Type</div><div class="font-semibold">Multiflora Honey</div></div>
+                        <div><div class="text-gray-600">Harvest Date</div><div class="font-semibold">15 March 2026</div></div>
+                        <div><div class="text-gray-600">&#x1F4CD; Origin</div><div class="font-semibold">Mathura, Uttar Pradesh</div></div>
+                        <div><div class="text-gray-600">Batch ID</div><div class="font-semibold">HNY-2026-001</div></div>
+                        <div><div class="text-gray-600">Weight</div><div class="font-semibold">500 g</div></div>
+                        <div><div class="text-gray-600">MRP</div><div class="font-semibold">&#x20B9;300</div></div>
                     </div>
                 </div>
             </div>
@@ -359,35 +326,20 @@
                     <span class="mr-2 emoji">&#x1F48A;</span> Health Benefits
                 </h3>
                 <div class="grid gap-3">
-                    <div class="bg-green-50 p-3 rounded-lg text-sm">
-                        <span class="text-2xl mr-2 emoji">&#x1F4AA;</span>
-                        <span class="font-bold text-green-600">Immunity Boost karta hai</span>
-                    </div>
-                    <div class="bg-green-50 p-3 rounded-lg text-sm">
-                        <span class="text-2xl mr-2 emoji">&#x2764;&#xFE0F;</span>
-                        <span class="font-bold text-green-600">Heart Health ke liye faydamand</span>
-                    </div>
-                    <div class="bg-green-50 p-3 rounded-lg text-sm">
-                        <span class="text-2xl mr-2 emoji">&#x1F9E0;</span>
-                        <span class="font-bold text-green-600">Brain Function improve karta hai</span>
-                    </div>
-                    <div class="bg-green-50 p-3 rounded-lg text-sm">
-                        <span class="text-2xl mr-2 emoji">&#x1F31D;</span>
-                        <span class="font-bold text-green-600">Natural Energy Source</span>
-                    </div>
-                    <div class="bg-green-50 p-3 rounded-lg text-sm">
-                        <span class="text-2xl mr-2 emoji">&#x1F634;</span>
-                        <span class="font-bold text-green-600">Better Sleep milti hai</span>
-                    </div>
+                    <div class="bg-green-50 p-3 rounded-lg text-sm"><span class="text-2xl mr-2 emoji">&#x1F4AA;</span><span class="font-bold text-green-600">Immunity Boost karta hai</span></div>
+                    <div class="bg-green-50 p-3 rounded-lg text-sm"><span class="text-2xl mr-2 emoji">&#x2764;&#xFE0F;</span><span class="font-bold text-green-600">Heart Health ke liye faydamand</span></div>
+                    <div class="bg-green-50 p-3 rounded-lg text-sm"><span class="text-2xl mr-2 emoji">&#x1F9E0;</span><span class="font-bold text-green-600">Brain Function improve karta hai</span></div>
+                    <div class="bg-green-50 p-3 rounded-lg text-sm"><span class="text-2xl mr-2 emoji">&#x1F31D;</span><span class="font-bold text-green-600">Natural Energy Source</span></div>
+                    <div class="bg-green-50 p-3 rounded-lg text-sm"><span class="text-2xl mr-2 emoji">&#x1F634;</span><span class="font-bold text-green-600">Better Sleep milti hai</span></div>
                 </div>
             </div>
 
-            <!-- Blockchain Verification -->
+            <!-- Blockchain -->
             <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg mb-6">
                 <h3 class="text-xl font-bold mb-4 flex items-center">
                     <span class="mr-2 emoji">&#x26D3;&#xFE0F;</span> Blockchain Verified
                 </h3>
-                <p class="text-xs text-blue-600 mt-1">Txn: 0x7a9b3c4d5e6f...</p>
+                <p class="text-xs text-blue-600">Txn: 0x7a9b3c4d5e6f... | Hyperledger Fabric v2.5</p>
             </div>
 
             <button class="w-full bg-orange-500 text-white py-3 rounded-lg font-semibold hover:bg-orange-600"
@@ -401,39 +353,22 @@
     <div class="screen" id="honeyTypes">
         <div class="container mx-auto px-4 py-8">
             <button class="text-gray-600 text-2xl mb-4 emoji" onclick="showScreen('home')">&#x2190;</button>
-            <h2 class="text-2xl font-bold mb-6">
-                <span class="emoji">&#x1F36F;</span> Honey Types
-            </h2>
+            <h2 class="text-2xl font-bold mb-6"><span class="emoji">&#x1F36F;</span> Honey Types</h2>
             <div class="space-y-4">
-                <div class="bg-white rounded-lg p-6 shadow card-hover cursor-pointer"
-                    onclick="showHoneyDetail('multiflora')">
-                    <div class="flex-1">
-                        <h4 class="font-bold text-lg">&#x1F33A; Multiflora Honey</h4>
-                        <p class="text-gray-600 text-sm">Kai phoolon ka meetha shehad — immunity aur energy ke liye best</p>
-                        <div class="flex items-center mt-2 space-x-4 text-xs text-gray-500">
-                            <span><span class="emoji">&#x2B50;</span> 4.8/5</span>
-                        </div>
-                    </div>
+                <div class="bg-white rounded-lg p-6 shadow card-hover cursor-pointer" onclick="showHoneyDetail('multiflora')">
+                    <h4 class="font-bold text-lg">&#x1F33A; Multiflora Honey</h4>
+                    <p class="text-gray-600 text-sm">Kai phoolon ka meetha shehad — immunity aur energy ke liye best</p>
+                    <span class="text-xs text-gray-500"><span class="emoji">&#x2B50;</span> 4.8/5</span>
                 </div>
-                <div class="bg-white rounded-lg p-6 shadow card-hover cursor-pointer"
-                    onclick="showHoneyDetail('mustard')">
-                    <div class="flex-1">
-                        <h4 class="font-bold text-lg">&#x1F33C; Sarson (Mustard) Honey</h4>
-                        <p class="text-gray-600 text-sm">Sarson ke khet se — heart health ke liye faydamand</p>
-                        <div class="flex items-center mt-2 space-x-4 text-xs text-gray-500">
-                            <span><span class="emoji">&#x2B50;</span> 4.7/5</span>
-                        </div>
-                    </div>
+                <div class="bg-white rounded-lg p-6 shadow card-hover cursor-pointer" onclick="showHoneyDetail('mustard')">
+                    <h4 class="font-bold text-lg">&#x1F33C; Sarson (Mustard) Honey</h4>
+                    <p class="text-gray-600 text-sm">Sarson ke khet se — heart health ke liye faydamand</p>
+                    <span class="text-xs text-gray-500"><span class="emoji">&#x2B50;</span> 4.7/5</span>
                 </div>
-                <div class="bg-white rounded-lg p-6 shadow card-hover cursor-pointer"
-                    onclick="showHoneyDetail('neem')">
-                    <div class="flex-1">
-                        <h4 class="font-bold text-lg">&#x1F333; Neem Honey</h4>
-                        <p class="text-gray-600 text-sm">Neem ke phoolon se — diabetes aur skin ke liye best</p>
-                        <div class="flex items-center mt-2 space-x-4 text-xs text-gray-500">
-                            <span><span class="emoji">&#x2B50;</span> 4.9/5</span>
-                        </div>
-                    </div>
+                <div class="bg-white rounded-lg p-6 shadow card-hover cursor-pointer" onclick="showHoneyDetail('neem')">
+                    <h4 class="font-bold text-lg">&#x1F333; Neem Honey</h4>
+                    <p class="text-gray-600 text-sm">Neem ke phoolon se — diabetes aur skin ke liye best</p>
+                    <span class="text-xs text-gray-500"><span class="emoji">&#x2B50;</span> 4.9/5</span>
                 </div>
             </div>
         </div>
@@ -442,17 +377,15 @@
     <!-- SCREEN 7: PROFILE -->
     <div class="screen" id="profile">
         <div class="container mx-auto px-4 py-8 max-w-2xl">
-            <h2 class="text-2xl font-bold mb-6">
-                <span class="emoji">&#x1F464;</span> My Profile
-            </h2>
+            <h2 class="text-2xl font-bold mb-6"><span class="emoji">&#x1F464;</span> My Profile</h2>
             <div class="bg-white rounded-lg shadow p-6 mb-4">
                 <div class="text-center mb-4">
                     <div class="text-6xl mb-2 emoji">&#x1F469;</div>
                     <h3 class="text-xl font-bold">Priya Sharma</h3>
                 </div>
                 <div class="text-sm text-gray-600">
-                    <p>&#x1F4E7; Email: priya@example.com</p>
-                    <p>&#x1F4DE; Phone: +91 98765 43210</p>
+                    <p>&#x1F4E7; priya@example.com</p>
+                    <p>&#x1F4DE; +91 98765 43210</p>
                 </div>
             </div>
             <div class="bg-white rounded-lg shadow p-6">
@@ -461,7 +394,7 @@
                     <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg">
                         <div>
                             <div class="font-semibold text-sm">QR-2026-001234 &#x2705; Verified</div>
-                            <div class="text-xs text-gray-600">2 Days ago</div>
+                            <div class="text-xs text-gray-600">2 days ago &mdash; Ramesh Sharma, Mathura UP</div>
                         </div>
                         <div class="text-xs text-gray-600">+&#x20B9;20 Cashback</div>
                     </div>
@@ -470,7 +403,13 @@
         </div>
     </div>
 
-</div><!-- end pb-20 -->
+</div>
+
+<!-- Demo Badge -->
+<div style="position:fixed;bottom:8px;left:8px;background:#fef3c7;color:#92400e;
+    padding:4px 10px;border-radius:8px;font-size:12px;z-index:9999">
+    Demo data &middot; Phase 2 prototype
+</div>
 
 <script>
     let currentScreen = 'home';
@@ -484,46 +423,30 @@
     }
 
     function updateNavigation(screenName) {
-        const screenTitle = document.getElementById('screenTitle');
-        const backBtn    = document.getElementById('backBtn');
-        const homeLink   = document.getElementById('homeLink');
-
         const titles = {
             'home'        : 'MadhuChain',
             'scan'        : '&#x1F4F7; QR Scanner',
-            'verify'      : '&#x1F510; Verify Code',
+            'verify'      : '&#x1F510; Cap PIN Verify',
             'success'     : '&#x2705; Verified!',
             'farmerProfile': '&#x1F468;&#x200D;&#x1F33E; Farmer Profile',
             'honeyTypes'  : '&#x1F36F; Honey Types',
             'profile'     : '&#x1F464; My Profile'
         };
-
-        screenTitle.innerHTML = titles[screenName] || 'MadhuChain';
-
-        if (screenName === 'home') {
-            backBtn.style.display  = 'none';
-            homeLink.style.display = 'block';
-        } else {
-            backBtn.style.display  = 'block';
-            homeLink.style.display = 'none';
-        }
+        document.getElementById('screenTitle').innerHTML = titles[screenName] || 'MadhuChain';
+        const isHome = screenName === 'home';
+        document.getElementById('backBtn').style.display  = isHome ? 'none'  : 'block';
+        document.getElementById('homeLink').style.display = isHome ? 'block' : 'none';
     }
 
     function goBack() {
-        const backFlow = {
-            'scan'        : 'home',
-            'verify'      : 'scan',
-            'success'     : 'home',
-            'farmerProfile': 'success',
-            'honeyTypes'  : 'home',
-            'profile'     : 'home'
-        };
+        const backFlow = { 'scan':'home','verify':'scan','success':'home','farmerProfile':'success','honeyTypes':'home','profile':'home' };
         showScreen(backFlow[currentScreen] || 'home');
     }
 
     function simulateScan() {
         scannedQR = 'QR-2026-001234';
-        displayQRCode(scannedQR);
+        const d = document.getElementById('qrCodeDisplay');
+        if (d) d.textContent = 'Scanned: ' + scannedQR;
         showScreen('verify');
     }
 
@@ -531,18 +454,14 @@
         const input = document.getElementById('manualQR');
         if (!input.value.trim()) { alert('Please enter QR code'); return; }
         scannedQR = input.value.trim();
-        displayQRCode(scannedQR);
+        const d = document.getElementById('qrCodeDisplay');
+        if (d) d.textContent = 'Code: ' + scannedQR;
         showScreen('verify');
-    }
-
-    function displayQRCode(qr) {
-        const display = document.getElementById('qrCodeDisplay');
-        if (display) display.textContent = 'Scanned Code: ' + qr;
     }
 
     function handleInput(index) {
         const input = document.getElementById('code' + index);
-        input.value = input.value.toUpperCase();
+        input.value = input.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
         if (input.value && index < 5) document.getElementById('code' + (index+1)).focus();
         checkAllFilled();
     }
@@ -553,30 +472,48 @@
     }
 
     function checkAllFilled() {
-        let allFilled = true;
-        for (let i = 0; i < 6; i++) {
-            if (!document.getElementById('code' + i).value) { allFilled = false; break; }
-        }
-        document.getElementById('verifyBtn').disabled = !allFilled;
+        let all = true;
+        for (let i = 0; i < 6; i++) if (!document.getElementById('code'+i).value) { all=false; break; }
+        document.getElementById('verifyBtn').disabled = !all;
     }
 
     function verifyCode() {
         let code = '';
-        for (let i = 0; i < 6; i++) code += document.getElementById('code' + i).value;
+        for (let i = 0; i < 6; i++) code += document.getElementById('code'+i).value;
+
+        // Validate alphanumeric
+        const ok = /^[A-Z0-9]{6}$/.test(code.toUpperCase());
+        if (!ok) { showError(); return; }
 
         const errorMsg = document.getElementById('errorMsg');
+        const usedMsg  = document.getElementById('usedMsg');
+        errorMsg.classList.add('hidden');
+        usedMsg.classList.add('hidden');
+
         if (code === 'A7K9M2') {
             showScreen('success');
+        } else if (code === 'B3C4D5') {
+            // Already used case
+            usedMsg.classList.remove('hidden');
+            clearInputs();
         } else {
-            errorMsg.classList.remove('hidden');
-            setTimeout(() => errorMsg.classList.add('hidden'), 3000);
-            for (let i = 0; i < 6; i++) document.getElementById('code' + i).value = '';
-            document.getElementById('code0').focus();
+            showError();
         }
     }
 
-    function showHoneyDetail(type) { showScreen('farmerProfile'); }
+    function showError() {
+        document.getElementById('errorMsg').classList.remove('hidden');
+        setTimeout(() => document.getElementById('errorMsg').classList.add('hidden'), 3000);
+        clearInputs();
+    }
 
+    function clearInputs() {
+        for (let i = 0; i < 6; i++) document.getElementById('code'+i).value = '';
+        document.getElementById('verifyBtn').disabled = true;
+        document.getElementById('code0').focus();
+    }
+
+    function showHoneyDetail() { showScreen('farmerProfile'); }
     window.onload = function() { updateNavigation('home'); };
 </script>
 </body>

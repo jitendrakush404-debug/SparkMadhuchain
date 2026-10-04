@@ -11,62 +11,47 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@300;400;600;700;900&family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
 <style>
     * { margin:0; padding:0; box-sizing:border-box; }
-
-    body {
-        font-family: 'Noto Sans Devanagari','Poppins',sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
-
+    body { font-family:'Noto Sans Devanagari','Poppins',sans-serif; -webkit-font-smoothing:antialiased; }
     .screen { display:none; }
     .screen.active { display:block; }
-
-    .sidebar { width:250px; }
-    .main-content { margin-left:250px; }
-
+    .sidebar { width:260px; }
+    .main-content { margin-left:260px; }
     .gradient-bg { background:linear-gradient(135deg,#FFA500 0%,#FF6347 100%); }
-
     @media (max-width:768px) {
         .sidebar { width:100%; position:fixed; z-index:50; height:auto; bottom:0; }
         .main-content { margin-left:0; margin-bottom:80px; }
         .sidebar-desktop { display:none; }
     }
-
     .stat-card { transition:all 0.3s ease; }
     .stat-card:hover { transform:translateY(-5px); box-shadow:0 10px 25px rgba(0,0,0,0.1); }
-
     .menu-item { transition:all 0.2s; }
     .menu-item:hover { background:#374151; transform:translateX(5px); }
     .menu-item.active { background:linear-gradient(135deg,#FFA500 0%,#FF6347 100%); }
-
     .pulse-dot { animation:pulse 2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.5;} }
-
-    .emoji {
-        font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;
-    }
+    .emoji { font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif; }
 </style>
 </head>
 <body class="bg-gray-100">
 
-<!-- Top Navigation -->
+<!-- Top Nav -->
 <nav class="gradient-bg text-white py-4 shadow-lg fixed top-0 left-0 right-0 z-50">
     <div class="container mx-auto px-4 flex justify-between items-center">
         <div class="flex items-center space-x-3">
             <a class="text-2xl hover:opacity-75 emoji" href="index.html">&#x2190;</a>
             <div>
                 <h1 class="text-2xl font-bold">MadhuChain Admin Panel</h1>
-                <p class="text-xs opacity-90">&#x1F4CA; Admin Dashboard</p>
+                <p class="text-xs opacity-90">&#x1F4CA; KVIC Control Centre</p>
             </div>
         </div>
         <div class="flex items-center space-x-4">
             <button class="relative" onclick="showNotifications()">
                 <span class="text-2xl emoji">&#x1F514;</span>
-                <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">5</span>
+                <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
             </button>
             <button class="text-2xl emoji" onclick="showScreen('settings')">&#x2699;&#xFE0F;</button>
             <span class="text-xl emoji">&#x1F464;</span>
-            <span class="text-sm font-semibold">Admin</span>
+            <span class="text-sm font-semibold">KVIC Admin</span>
             <button class="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-red-700 transition">
                 &#x1F6AA; Logout
             </button>
@@ -74,48 +59,28 @@
     </div>
 </nav>
 
-<!-- Sidebar (Desktop) -->
+<!-- Sidebar (Desktop) — 4 tabs only -->
 <aside class="sidebar sidebar-desktop bg-gray-800 text-white fixed top-16 left-0 bottom-0 overflow-y-auto">
     <nav class="p-4">
         <button class="menu-item active w-full text-left px-4 py-3 rounded-lg hover:bg-gray-700 transition flex items-center space-x-3 mb-2"
-            onclick="showScreen('dashboard')">
-            <span class="text-xl emoji">&#x1F4CA;</span>
-            <span>Dashboard</span>
+            onclick="setActive(this); showScreen('dashboard')">
+            <span class="text-xl emoji">&#x1F4CA;</span><span>Dashboard</span>
         </button>
         <button class="menu-item w-full text-left px-4 py-3 rounded-lg hover:bg-gray-700 transition flex items-center space-x-3 mb-2"
-            onclick="showScreen('farmers')">
-            <span class="text-xl emoji">&#x1F468;&#x200D;&#x1F33E;</span>
-            <span>Farmers</span>
+            onclick="setActive(this); showScreen('onboarding')">
+            <span class="text-xl emoji">&#x1F468;&#x200D;&#x1F33E;</span><span>Onboarding Queue</span>
         </button>
         <button class="menu-item w-full text-left px-4 py-3 rounded-lg hover:bg-gray-700 transition flex items-center space-x-3 mb-2"
-            onclick="showScreen('customers')">
-            <span class="text-xl emoji">&#x1F465;</span>
-            <span>Customers</span>
+            onclick="setActive(this); showScreen('qrGenerator')">
+            <span class="text-xl emoji">&#x1F4F1;&#x1F510;</span><span>QR &amp; Cap Code Generator</span>
         </button>
         <button class="menu-item w-full text-left px-4 py-3 rounded-lg hover:bg-gray-700 transition flex items-center space-x-3 mb-2"
-            onclick="showScreen('honeyBatches')">
-            <span class="text-xl emoji">&#x1F36F;</span>
-            <span>Honey Batches</span>
-        </button>
-        <button class="menu-item w-full text-left px-4 py-3 rounded-lg hover:bg-gray-700 transition flex items-center space-x-3 mb-2"
-            onclick="showScreen('blockchain')">
-            <span class="text-xl emoji">&#x26D3;&#xFE0F;</span>
-            <span>Blockchain</span>
-        </button>
-        <button class="menu-item w-full text-left px-4 py-3 rounded-lg hover:bg-gray-700 transition flex items-center space-x-3 mb-2"
-            onclick="showScreen('botManagement')">
-            <span class="text-xl emoji">&#x1F916;</span>
-            <span>Bot Management</span>
-        </button>
-        <button class="menu-item w-full text-left px-4 py-3 rounded-lg hover:bg-gray-700 transition flex items-center space-x-3 mb-2"
-            onclick="showScreen('financial')">
-            <span class="text-xl emoji">&#x1F4B0;</span>
-            <span>Financial</span>
+            onclick="setActive(this); showScreen('blockchain')">
+            <span class="text-xl emoji">&#x26D3;&#xFE0F;</span><span>Blockchain Explorer</span>
         </button>
         <button class="menu-item w-full text-left px-4 py-3 rounded-lg hover:bg-gray-700 transition flex items-center space-x-3"
-            onclick="showScreen('settings')">
-            <span class="text-xl emoji">&#x2699;&#xFE0F;</span>
-            <span>Settings</span>
+            onclick="setActive(this); showScreen('fraudAlerts')">
+            <span class="text-xl emoji">&#x1F6A8;</span><span>Fraud Alerts</span>
         </button>
     </nav>
 </aside>
@@ -126,93 +91,85 @@
     <!-- SCREEN 1: DASHBOARD -->
     <div class="screen active" id="dashboard">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl font-bold mb-6">
-                <span class="emoji">&#x1F4CA;</span> Dashboard Overview
-            </h2>
+            <h2 class="text-3xl font-bold mb-6"><span class="emoji">&#x1F4CA;</span> Dashboard Overview</h2>
 
-            <!-- Stats Cards -->
+            <!-- Stats -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 <div class="stat-card bg-white rounded-lg shadow-lg p-6 border-l-4 border-blue-500">
                     <div class="flex justify-between items-start">
                         <div>
                             <p class="text-gray-600 text-sm mb-1">Registered Farmers</p>
-                            <h3 class="text-3xl font-bold text-blue-600">450</h3>
-                            <p class="text-green-500 text-sm mt-2">&#x2191; 12% This Month</p>
+                            <h3 class="text-3xl font-bold text-blue-600">~15,000</h3>
+                            <p class="text-gray-500 text-xs mt-2">Madhukranti (PIB, Oct 2025)</p>
                         </div>
                         <div class="text-4xl emoji">&#x1F468;&#x200D;&#x1F33E;</div>
                     </div>
                 </div>
-
                 <div class="stat-card bg-white rounded-lg shadow-lg p-6 border-l-4 border-green-500">
                     <div class="flex justify-between items-start">
                         <div>
-                            <p class="text-gray-600 text-sm mb-1">QR Codes Generated</p>
+                            <p class="text-gray-600 text-sm mb-1">QR + Cap Codes Generated</p>
                             <h3 class="text-3xl font-bold text-green-600">1,240</h3>
                             <p class="text-green-500 text-sm mt-2">&#x2191; 8% This Month</p>
                         </div>
-                        <div class="text-4xl emoji">&#x1F4F1;</div>
+                        <div class="text-4xl emoji">&#x1F4F1;&#x1F510;</div>
                     </div>
                 </div>
-
                 <div class="stat-card bg-white rounded-lg shadow-lg p-6 border-l-4 border-orange-500">
                     <div class="flex justify-between items-start">
                         <div>
-                            <p class="text-gray-600 text-sm mb-1">Verified Products</p>
+                            <p class="text-gray-600 text-sm mb-1">Verified Bottles</p>
                             <h3 class="text-3xl font-bold text-orange-600">980</h3>
                             <p class="text-green-500 text-sm mt-2">&#x2191; 15% This Month</p>
                         </div>
                         <div class="text-4xl emoji">&#x2705;</div>
                     </div>
                 </div>
-
-                <div class="stat-card bg-white rounded-lg shadow-lg p-6 border-l-4 border-purple-500">
+                <div class="stat-card bg-white rounded-lg shadow-lg p-6 border-l-4 border-red-500">
                     <div class="flex justify-between items-start">
                         <div>
-                            <p class="text-gray-600 text-sm mb-1">Cashback Distributed</p>
-                            <h3 class="text-3xl font-bold text-purple-600">&#x20B9;19,600</h3>
-                            <p class="text-green-500 text-sm mt-2">980 Transactions</p>
+                            <p class="text-gray-600 text-sm mb-1">Fraud Alerts</p>
+                            <h3 class="text-3xl font-bold text-red-600">3</h3>
+                            <p class="text-red-500 text-sm mt-2">&#x26A0;&#xFE0F; Action required</p>
                         </div>
-                        <div class="text-4xl emoji">&#x1F4B0;</div>
+                        <div class="text-4xl emoji">&#x1F6A8;</div>
                     </div>
                 </div>
             </div>
 
             <!-- Charts Row -->
             <div class="grid md:grid-cols-2 gap-6 mb-8">
-
                 <!-- Recent Activity -->
                 <div class="bg-white rounded-lg shadow-lg p-6">
-                    <h3 class="text-xl font-bold mb-4">
-                        &#x1F36F; Recent Honey Batches
-                    </h3>
+                    <h3 class="text-xl font-bold mb-4">&#x1F36F; Recent Verified Batches</h3>
                     <div class="space-y-3">
                         <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg">
                             <div>
-                                <p class="font-semibold text-sm">&#x2705; Rajesh Kumar</p>
-                                <p class="text-xs text-gray-600">QR-2026-001234 — Verified</p>
+                                <p class="font-semibold text-sm">&#x2705; Ramesh Sharma — F001</p>
+                                <p class="text-xs text-gray-600">QR-2026-001234 | Mathura, UP</p>
                             </div>
-                            <span class="text-xs text-gray-500">2 hours ago</span>
+                            <span class="text-xs text-gray-500">2 hrs ago</span>
                         </div>
                         <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg">
                             <div>
-                                <p class="font-semibold text-sm">&#x2705; Priya Singh</p>
-                                <p class="text-xs text-gray-600">QR-2026-001235 — Verified</p>
+                                <p class="font-semibold text-sm">&#x2705; Priya Singh — F002</p>
+                                <p class="text-xs text-gray-600">QR-2026-001235 | Jaipur, Rajasthan</p>
                             </div>
-                            <span class="text-xs text-gray-500">5 hours ago</span>
+                            <span class="text-xs text-gray-500">5 hrs ago</span>
                         </div>
                         <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg">
                             <div>
-                                <p class="font-semibold text-sm">&#x2705; Mohan Patel</p>
-                                <p class="text-xs text-gray-600">QR-2026-001236 — Verified</p>
+                                <p class="font-semibold text-sm">&#x2705; Mohan Patel — F003</p>
+                                <p class="text-xs text-gray-600">QR-2026-001236 | Ahmedabad, Gujarat</p>
                             </div>
-                            <span class="text-xs text-gray-500">12 hours ago</span>
+                            <span class="text-xs text-gray-500">12 hrs ago</span>
                         </div>
                         <div class="flex items-center justify-between p-3 bg-red-50 rounded-lg">
                             <div>
-                                <p class="font-semibold text-sm text-red-700">&#x26A0;&#xFE0F; Suspicious Scan</p>
-                                <p class="text-xs text-gray-600">QR-2026-001237 — Flagged</p>
+                                <p class="font-semibold text-sm text-red-700">&#x26A0;&#xFE0F; Suspicious Scan Detected</p>
+                                <p class="text-xs text-gray-600">QR-2026-001237 — Mumbai &amp; Delhi — 7 min apart</p>
                             </div>
-                            <span class="text-xs text-gray-500">18 hours ago</span>
+                            <span class="text-xs text-gray-500">18 hrs ago</span>
                         </div>
                     </div>
                 </div>
@@ -238,74 +195,25 @@
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-3">
                                 <span class="w-3 h-3 bg-green-500 rounded-full pulse-dot"></span>
-                                <span class="font-semibold">API Response Time</span>
+                                <span class="font-semibold">Ollama AI Server</span>
                             </div>
-                            <span class="text-sm text-green-600 font-semibold">450ms</span>
+                            <span class="text-sm text-green-600 font-semibold">&#x2705; Online</span>
                         </div>
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-3">
                                 <span class="w-3 h-3 bg-yellow-500 rounded-full pulse-dot"></span>
-                                <span class="font-semibold">Database</span>
+                                <span class="font-semibold">API Response Time</span>
                             </div>
-                            <span class="text-sm text-yellow-600 font-semibold">&#x26A0;&#xFE0F; High Load</span>
+                            <span class="text-sm text-yellow-600 font-semibold">&#x26A0;&#xFE0F; 450ms</span>
                         </div>
                     </div>
-
                     <div class="mt-6 p-4 bg-blue-50 rounded-lg">
                         <h4 class="font-semibold text-blue-800 mb-2">&#x1F4C8; Today's Stats</h4>
                         <div class="grid grid-cols-2 gap-4 text-sm">
-                            <div>
-                                <p class="text-gray-600">Messages Sent</p>
-                                <p class="font-bold text-blue-600">1,250</p>
-                            </div>
-                            <div>
-                                <p class="text-gray-600">Active Users</p>
-                                <p class="font-bold text-blue-600">89</p>
-                            </div>
-                            <div>
-                                <p class="text-gray-600">New Farmers</p>
-                                <p class="font-bold text-blue-600">3</p>
-                            </div>
-                            <div>
-                                <p class="text-gray-600">Cashback Today</p>
-                                <p class="font-bold text-blue-600">&#x20B9;2,900</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Alerts -->
-            <div class="bg-white rounded-lg shadow-lg p-6">
-                <h3 class="text-xl font-bold mb-4 flex items-center">
-                    <span class="mr-2 emoji">&#x1F6A8;</span> System Alerts
-                </h3>
-                <div class="space-y-3">
-                    <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
-                        <div class="flex items-start justify-between">
-                            <div>
-                                <p class="font-semibold text-red-700">&#x26A0;&#xFE0F; Suspicious QR Scan Detected</p>
-                                <p class="text-sm text-gray-600 mt-1">QR-2026-001234 — Same QR 3 baar scan hua</p>
-                            </div>
-                            <span class="text-xs text-gray-500">5 min ago</span>
-                        </div>
-                    </div>
-                    <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded">
-                        <div class="flex items-start justify-between">
-                            <div>
-                                <p class="font-semibold text-yellow-700">&#x1F41D; Low Hive Health Alert</p>
-                                <p class="text-sm text-gray-600 mt-1">Farmer F045 — Hive temperature high (38°C)</p>
-                            </div>
-                            <span class="text-xs text-gray-500">1 hour ago</span>
-                        </div>
-                    </div>
-                    <div class="bg-orange-50 border-l-4 border-orange-500 p-4 rounded">
-                        <div class="flex items-start justify-between">
-                            <div>
-                                <p class="font-semibold text-orange-700">&#x1F4BB; API Response Slow</p>
-                                <p class="text-sm text-gray-600 mt-1">Current: 450ms (Ideal: 300ms)</p>
-                            </div>
-                            <span class="text-xs text-gray-500">2 hours ago</span>
+                            <div><p class="text-gray-600">Bot Messages</p><p class="font-bold text-blue-600">1,250</p></div>
+                            <div><p class="text-gray-600">Active Farmers</p><p class="font-bold text-blue-600">89</p></div>
+                            <div><p class="text-gray-600">New Onboarding</p><p class="font-bold text-blue-600">3</p></div>
+                            <div><p class="text-gray-600">Cashback Today</p><p class="font-bold text-blue-600">&#x20B9;2,900</p></div>
                         </div>
                     </div>
                 </div>
@@ -313,12 +221,12 @@
         </div>
     </div>
 
-    <!-- SCREEN 2: FARMERS MANAGEMENT -->
-    <div class="screen" id="farmers">
+    <!-- SCREEN 2: ONBOARDING QUEUE -->
+    <div class="screen" id="onboarding">
         <div class="max-w-7xl mx-auto">
             <div class="flex items-center justify-between mb-6">
                 <h2 class="text-3xl font-bold">
-                    <span class="emoji">&#x1F468;&#x200D;&#x1F33E;</span> Farmer Management
+                    <span class="emoji">&#x1F468;&#x200D;&#x1F33E;</span> Farmer Onboarding Queue
                 </h2>
                 <button class="bg-orange-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-600 transition"
                     onclick="showAddFarmerModal()">
@@ -333,14 +241,14 @@
                         placeholder="&#x1F50D; Search Farmers..." type="text"/>
                     <select class="border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
                         <option>All States</option>
-                        <option>Maharashtra</option>
+                        <option>Uttar Pradesh</option>
                         <option>Rajasthan</option>
-                        <option>Bihar</option>
+                        <option>Gujarat</option>
                         <option>Uttarakhand</option>
                     </select>
                     <select class="border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
                         <option>Status: All</option>
-                        <option>&#x2705; Active</option>
+                        <option>&#x2705; Approved</option>
                         <option>&#x23F3; Pending</option>
                     </select>
                     <button class="bg-blue-500 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-600">
@@ -351,9 +259,9 @@
 
             <!-- Pending Approvals -->
             <div class="bg-orange-50 border border-orange-200 rounded-lg p-6 mb-6">
-                <h3 class="text-xl font-bold text-orange-800 mb-4">
-                    &#x23F3; Pending Approvals (2)
-                </h3>
+                <h3 class="text-xl font-bold text-orange-800 mb-4">&#x23F3; Pending Approval (2)</h3>
+
+                <!-- Farmer 1 -->
                 <div class="bg-white rounded-lg shadow p-4 mb-4">
                     <div class="flex items-start justify-between">
                         <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center text-3xl emoji">
@@ -361,23 +269,18 @@
                         </div>
                         <div class="flex-1 mx-4">
                             <h4 class="font-bold text-lg">Suresh Yadav</h4>
-                            <p class="text-sm text-gray-600">
-                                <span class="emoji">&#x1F4CD;</span> Lucknow, Uttar Pradesh
-                            </p>
-                            <p class="text-sm text-gray-600">
-                                <span class="emoji">&#x1F41D;</span> 10 Years Experience
-                            </p>
+                            <p class="text-sm text-gray-600"><span class="emoji">&#x1F4CD;</span> Lucknow, Uttar Pradesh</p>
+                            <p class="text-sm text-gray-600"><span class="emoji">&#x1F4C4;</span> Aadhaar: XXXX-XXXX-4821</p>
+                            <p class="text-sm text-gray-600"><span class="emoji">&#x1F41D;</span> 10 Years Experience | 8 Hives</p>
                         </div>
                         <div class="flex space-x-2">
-                            <button class="bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-green-600">
-                                &#x2705; Approve
-                            </button>
-                            <button class="bg-red-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-red-600">
-                                &#x274C; Reject
-                            </button>
+                            <button class="bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-green-600">&#x2705; Approve</button>
+                            <button class="bg-red-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-red-600">&#x274C; Reject</button>
                         </div>
                     </div>
                 </div>
+
+                <!-- Farmer 2 -->
                 <div class="bg-white rounded-lg shadow p-4">
                     <div class="flex items-start justify-between">
                         <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center text-3xl emoji">
@@ -385,20 +288,13 @@
                         </div>
                         <div class="flex-1 mx-4">
                             <h4 class="font-bold text-lg">Meena Devi</h4>
-                            <p class="text-sm text-gray-600">
-                                <span class="emoji">&#x1F4CD;</span> Jaipur, Rajasthan
-                            </p>
-                            <p class="text-sm text-gray-600">
-                                <span class="emoji">&#x1F41D;</span> 5 Years Experience
-                            </p>
+                            <p class="text-sm text-gray-600"><span class="emoji">&#x1F4CD;</span> Jaipur, Rajasthan</p>
+                            <p class="text-sm text-gray-600"><span class="emoji">&#x1F4C4;</span> Aadhaar: XXXX-XXXX-7732</p>
+                            <p class="text-sm text-gray-600"><span class="emoji">&#x1F41D;</span> 5 Years Experience | 4 Hives</p>
                         </div>
                         <div class="flex space-x-2">
-                            <button class="bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-green-600">
-                                &#x2705; Approve
-                            </button>
-                            <button class="bg-red-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-red-600">
-                                &#x274C; Reject
-                            </button>
+                            <button class="bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-green-600">&#x2705; Approve</button>
+                            <button class="bg-red-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-red-600">&#x274C; Reject</button>
                         </div>
                     </div>
                 </div>
@@ -421,82 +317,45 @@
                         <tr class="hover:bg-gray-50">
                             <td class="px-6 py-4">
                                 <div class="flex items-center space-x-3">
-                                    <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center emoji">
-                                        &#x1F468;&#x200D;&#x1F33E;
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold">Rajesh Kumar</p>
-                                        <p class="text-xs text-gray-500">F001</p>
-                                    </div>
+                                    <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center emoji">&#x1F468;&#x200D;&#x1F33E;</div>
+                                    <div><p class="font-semibold">Ramesh Sharma</p><p class="text-xs text-gray-500">F001 | XXXX-XXXX-4821</p></div>
                                 </div>
                             </td>
-                            <td class="px-6 py-4"><p class="text-sm">Pune, Maharashtra</p></td>
+                            <td class="px-6 py-4"><p class="text-sm">Mathura, Uttar Pradesh</p></td>
                             <td class="px-6 py-4"><p class="text-sm">5</p></td>
-                            <td class="px-6 py-4">
-                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold">250</span>
-                            </td>
-                            <td class="px-6 py-4">
-                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold">&#x2705; Active</span>
-                            </td>
-                            <td class="px-6 py-4">
-                                <button class="text-blue-600 hover:text-blue-800 text-sm font-semibold"
-                                    onclick="viewFarmerDetails('F001')">&#x1F441;&#xFE0F; View</button>
-                            </td>
+                            <td class="px-6 py-4"><span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold">250</span></td>
+                            <td class="px-6 py-4"><span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold">&#x2705; Active</span></td>
+                            <td class="px-6 py-4"><button class="text-blue-600 hover:text-blue-800 text-sm font-semibold" onclick="viewFarmerDetails('F001')">&#x1F441;&#xFE0F; View</button></td>
                         </tr>
                         <tr class="hover:bg-gray-50">
                             <td class="px-6 py-4">
                                 <div class="flex items-center space-x-3">
-                                    <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center emoji">
-                                        &#x1F469;&#x200D;&#x1F33E;
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold">Priya Singh</p>
-                                        <p class="text-xs text-gray-500">F002</p>
-                                    </div>
+                                    <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center emoji">&#x1F469;&#x200D;&#x1F33E;</div>
+                                    <div><p class="font-semibold">Priya Singh</p><p class="text-xs text-gray-500">F002 | XXXX-XXXX-5590</p></div>
                                 </div>
                             </td>
                             <td class="px-6 py-4"><p class="text-sm">Jaipur, Rajasthan</p></td>
                             <td class="px-6 py-4"><p class="text-sm">12</p></td>
-                            <td class="px-6 py-4">
-                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold">180</span>
-                            </td>
-                            <td class="px-6 py-4">
-                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold">&#x2705; Active</span>
-                            </td>
-                            <td class="px-6 py-4">
-                                <button class="text-blue-600 hover:text-blue-800 text-sm font-semibold"
-                                    onclick="viewFarmerDetails('F002')">&#x1F441;&#xFE0F; View</button>
-                            </td>
+                            <td class="px-6 py-4"><span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold">180</span></td>
+                            <td class="px-6 py-4"><span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold">&#x2705; Active</span></td>
+                            <td class="px-6 py-4"><button class="text-blue-600 hover:text-blue-800 text-sm font-semibold" onclick="viewFarmerDetails('F002')">&#x1F441;&#xFE0F; View</button></td>
                         </tr>
                         <tr class="hover:bg-gray-50">
                             <td class="px-6 py-4">
                                 <div class="flex items-center space-x-3">
-                                    <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center emoji">
-                                        &#x1F468;&#x200D;&#x1F33E;
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold">Mohan Patel</p>
-                                        <p class="text-xs text-gray-500">F003</p>
-                                    </div>
+                                    <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center emoji">&#x1F468;&#x200D;&#x1F33E;</div>
+                                    <div><p class="font-semibold">Mohan Patel</p><p class="text-xs text-gray-500">F003 | XXXX-XXXX-3314</p></div>
                                 </div>
                             </td>
                             <td class="px-6 py-4"><p class="text-sm">Ahmedabad, Gujarat</p></td>
                             <td class="px-6 py-4"><p class="text-sm">8</p></td>
-                            <td class="px-6 py-4">
-                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold">320</span>
-                            </td>
-                            <td class="px-6 py-4">
-                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold">&#x2705; Active</span>
-                            </td>
-                            <td class="px-6 py-4">
-                                <button class="text-blue-600 hover:text-blue-800 text-sm font-semibold"
-                                    onclick="viewFarmerDetails('F003')">&#x1F441;&#xFE0F; View</button>
-                            </td>
+                            <td class="px-6 py-4"><span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold">320</span></td>
+                            <td class="px-6 py-4"><span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold">&#x2705; Active</span></td>
+                            <td class="px-6 py-4"><button class="text-blue-600 hover:text-blue-800 text-sm font-semibold" onclick="viewFarmerDetails('F003')">&#x1F441;&#xFE0F; View</button></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-
             <div class="mt-6 flex justify-between items-center">
                 <p class="text-gray-600">Showing 1-3 of 450 farmers</p>
                 <div class="flex space-x-2">
@@ -509,40 +368,78 @@
         </div>
     </div>
 
-    <!-- SCREEN 3: CUSTOMERS -->
-    <div class="screen" id="customers">
+    <!-- SCREEN 3: QR & CAP CODE GENERATOR -->
+    <div class="screen" id="qrGenerator">
         <div class="max-w-7xl mx-auto">
             <h2 class="text-3xl font-bold mb-6">
-                <span class="emoji">&#x1F465;</span> Customer Management
-            </h2>
-            <div class="bg-white rounded-lg shadow-lg p-6">
-                <h3 class="text-2xl font-bold mb-4">&#x2705; Total Verified Customers: 980</h3>
-                <p class="text-gray-600">Customer data loading...</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- SCREEN 4: HONEY BATCHES -->
-    <div class="screen" id="honeyBatches">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl font-bold mb-6">
-                <span class="emoji">&#x1F36F;</span> Honey Batches
-            </h2>
-            <div class="bg-white rounded-lg shadow-lg p-6">
-                <h3 class="text-2xl font-bold mb-4">&#x1F4F1; Total QR Codes: 1,240</h3>
-                <p class="text-gray-600">Honey batch data loading...</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- SCREEN 5: BLOCKCHAIN -->
-    <div class="screen" id="blockchain">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl font-bold mb-6">
-                <span class="emoji">&#x26D3;&#xFE0F;</span> Blockchain Monitor
+                <span class="emoji">&#x1F4F1;&#x1F510;</span> Bulk QR &amp; Cap Code Generator
             </h2>
             <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
-                <h3 class="text-2xl font-bold mb-4">Hyperledger Fabric Network</h3>
+                <h3 class="text-xl font-bold mb-4">Generate New Batch</h3>
+                <div class="grid md:grid-cols-3 gap-4 mb-6">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Farmer ID</label>
+                        <select class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                            <option>F001 — Ramesh Sharma, Mathura UP</option>
+                            <option>F002 — Priya Singh, Jaipur Rajasthan</option>
+                            <option>F003 — Mohan Patel, Ahmedabad Gujarat</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Honey Type</label>
+                        <select class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                            <option>Multiflora Honey</option>
+                            <option>Sarson (Mustard) Honey</option>
+                            <option>Neem Honey</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Number of Bottles (500g each)</label>
+                        <input class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                            type="number" value="50" min="1" max="500"/>
+                    </div>
+                </div>
+                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+                    <p class="text-sm text-yellow-800">
+                        <span class="emoji">&#x2139;&#xFE0F;</span>
+                        Each bottle gets: 1 unique QR Code + 1 unique 6-character Cap PIN (A-Z, 0-9). 217 crore+ combinations. Single-use &amp; auto-disabled after first scan.
+                    </p>
+                </div>
+                <button class="bg-orange-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-orange-600 transition"
+                    onclick="generateCodes()">
+                    &#x1F4E5; Generate &amp; Download PDF
+                </button>
+            </div>
+
+            <!-- Recent Batches -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold mb-4">&#x1F4CB; Recent Batches</h3>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                        <div>
+                            <p class="font-semibold text-sm">HNY-2026-001 — Ramesh Sharma, Mathura UP</p>
+                            <p class="text-xs text-gray-600">50 bottles | Multiflora | 15 March 2026</p>
+                        </div>
+                        <button class="text-blue-600 text-sm font-semibold">&#x1F4E5; Download PDF</button>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                        <div>
+                            <p class="font-semibold text-sm">HNY-2026-002 — Priya Singh, Jaipur Rajasthan</p>
+                            <p class="text-xs text-gray-600">80 bottles | Sarson Honey | 10 March 2026</p>
+                        </div>
+                        <button class="text-blue-600 text-sm font-semibold">&#x1F4E5; Download PDF</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCREEN 4: BLOCKCHAIN EXPLORER -->
+    <div class="screen" id="blockchain">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold mb-6"><span class="emoji">&#x26D3;&#xFE0F;</span> Live Blockchain Explorer</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-2xl font-bold mb-4">Hyperledger Fabric v2.5 Network</h3>
                 <div class="grid md:grid-cols-3 gap-6">
                     <div class="bg-green-50 p-4 rounded-lg text-center">
                         <h3 class="font-bold mb-2">Network Status</h3>
@@ -558,89 +455,104 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- SCREEN 6: BOT MANAGEMENT -->
-    <div class="screen" id="botManagement">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl font-bold mb-6">
-                <span class="emoji">&#x1F916;</span> Bot Management
-            </h2>
-            <div class="grid md:grid-cols-4 gap-6">
-                <div class="bg-green-50 p-6 rounded-lg text-center">
-                    <h3 class="font-bold mb-2">Bot Status</h3>
-                    <p class="text-2xl font-bold text-green-600">&#x2705; Online</p>
-                </div>
-                <div class="bg-blue-50 p-4 rounded-lg text-center">
-                    <h3 class="font-bold mb-2">Total Messages</h3>
-                    <p class="text-2xl font-bold text-blue-600">1,250</p>
-                </div>
-                <div class="bg-orange-50 p-4 rounded-lg text-center">
-                    <h3 class="font-bold mb-2">Active Farmers</h3>
-                    <p class="text-2xl font-bold text-orange-600">127</p>
-                </div>
-                <div class="bg-purple-50 p-4 rounded-lg text-center">
-                    <h3 class="font-bold mb-2">Response Rate</h3>
-                    <p class="text-2xl font-bold text-purple-600">98.5%</p>
+            <!-- Recent Transactions -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold mb-4">&#x1F4DC; Recent Transactions</h3>
+                <div class="space-y-3 font-mono text-xs">
+                    <div class="p-3 bg-gray-50 rounded-lg">
+                        <p class="text-green-600 font-bold">&#x2705; VERIFIED</p>
+                        <p class="text-gray-700">Txn: 0x7a9b3c4d5e6f... | QR-2026-001234 | F001 | 2 hrs ago</p>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded-lg">
+                        <p class="text-green-600 font-bold">&#x2705; VERIFIED</p>
+                        <p class="text-gray-700">Txn: 0x8b2c4d5e7f8a... | QR-2026-001235 | F002 | 5 hrs ago</p>
+                    </div>
+                    <div class="p-3 bg-red-50 rounded-lg">
+                        <p class="text-red-600 font-bold">&#x26A0;&#xFE0F; FRAUD FLAGGED</p>
+                        <p class="text-gray-700">Txn: 0x9c3d5e6f8g9b... | QR-2026-001237 | Duplicate scan | 18 hrs ago</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- SCREEN 7: FINANCIAL -->
-    <div class="screen" id="financial">
+    <!-- SCREEN 5: FRAUD ALERTS -->
+    <div class="screen" id="fraudAlerts">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl font-bold mb-6">
-                <span class="emoji">&#x1F4B0;</span> Financial Reports
-            </h2>
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="bg-green-50 p-6 rounded-lg">
-                    <h3 class="font-bold mb-2">&#x1F4B5; Total Cashback</h3>
-                    <p class="text-3xl font-bold text-green-600">&#x20B9;19,600</p>
-                    <p class="text-sm text-gray-600 mt-2">980 Transactions</p>
+            <h2 class="text-3xl font-bold mb-6"><span class="emoji">&#x1F6A8;</span> AI Fraud &amp; Duplicate Scan Detection</h2>
+
+            <!-- Auto-popup Fraud Alert Demo -->
+            <div id="fraudAlertDemo" style="display:none;background:#fee2e2;border:1px solid #dc2626;
+                color:#7f1d1d;padding:16px;border-radius:12px;margin-bottom:16px;animation:pulse 2s infinite;">
+                <p class="font-bold text-lg">&#x26A0;&#xFE0F; SUSPICIOUS SCAN DETECTED — AUTO ALERT</p>
+                <p class="mt-2">Cap code <strong>A7K9M2</strong> scanned in <strong>Mumbai</strong> (10:02 AM) and <strong>Delhi</strong> (10:09 AM) — only 7 minutes apart.</p>
+                <p class="mt-1 text-sm">&#x1F4CD; 1,400+ km distance in 7 min = physically impossible. Code has been <strong>auto-blocked</strong>.</p>
+                <div class="flex gap-2 mt-3">
+                    <button class="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">&#x1F6AB; Confirm Block</button>
+                    <button class="bg-gray-500 text-white px-4 py-2 rounded-lg text-sm font-semibold" onclick="document.getElementById('fraudAlertDemo').style.display='none'">Dismiss</button>
                 </div>
-                <div class="bg-orange-50 p-6 rounded-lg">
-                    <h3 class="font-bold mb-2">&#x1F41D; Bee Credits Issued</h3>
-                    <p class="text-3xl font-bold text-orange-600">4,900</p>
-                    <p class="text-sm text-gray-600 mt-2">Total Credits</p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <p class="font-bold text-red-700 text-lg">&#x26A0;&#xFE0F; Duplicate Scan — City Mismatch</p>
+                            <p class="text-gray-700 mt-2">Cap code <strong>A7K9M2</strong> scanned in Mumbai (10:02 AM) &amp; Delhi (10:09 AM) — 7 min apart, 1,400+ km.</p>
+                            <p class="text-sm text-gray-500 mt-1">QR-2026-001237 | Code auto-blocked by system</p>
+                        </div>
+                        <span class="text-xs text-gray-500 whitespace-nowrap ml-4">18 hrs ago</span>
+                    </div>
                 </div>
-                <div class="bg-blue-50 p-6 rounded-lg">
-                    <h3 class="font-bold mb-2">&#x1F4B3; Per Transaction</h3>
-                    <p class="text-3xl font-bold text-blue-600">&#x20B9;20</p>
-                    <p class="text-sm text-gray-600 mt-2">Avg. Cashback</p>
+                <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-lg">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <p class="font-bold text-yellow-700 text-lg">&#x1F41D; Hive Temperature Alert</p>
+                            <p class="text-gray-700 mt-2">Farmer F001 (Ramesh Sharma, Mathura) — Hive #5 temperature 38&deg;C. Risk of colony collapse. 6-7 hives damaged = &#x20B9;14,000 season loss.</p>
+                        </div>
+                        <span class="text-xs text-gray-500 whitespace-nowrap ml-4">1 hr ago</span>
+                    </div>
+                </div>
+                <div class="bg-orange-50 border-l-4 border-orange-500 p-6 rounded-lg">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <p class="font-bold text-orange-700 text-lg">&#x1F4BB; API Response Time High</p>
+                            <p class="text-gray-700 mt-2">Current: 450ms (Ideal: &lt; 300ms). Check Oracle VM load.</p>
+                        </div>
+                        <span class="text-xs text-gray-500 whitespace-nowrap ml-4">2 hrs ago</span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- SCREEN 8: SETTINGS -->
+    <!-- SCREEN 6: SETTINGS -->
     <div class="screen" id="settings">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl font-bold mb-6">
-                <span class="emoji">&#x2699;&#xFE0F;</span> System Settings
-            </h2>
+            <h2 class="text-3xl font-bold mb-6"><span class="emoji">&#x2699;&#xFE0F;</span> System Settings</h2>
             <div class="bg-white rounded-lg shadow-lg p-6">
                 <div class="space-y-4">
                     <div>
                         <label class="block text-sm font-semibold mb-2">&#x1F3F7;&#xFE0F; System Name</label>
-                        <input class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                            type="text" value="MadhuChain"/>
+                        <input class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500" type="text" value="MadhuChain"/>
                     </div>
                     <div>
-                        <label class="block text-sm font-semibold mb-2">&#x1F4E7; Support Email</label>
-                        <input class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                            type="email" value="support@madhuchain.in"/>
+                        <label class="block text-sm font-semibold mb-2">&#x26D3;&#xFE0F; Blockchain Network</label>
+                        <input class="w-full border rounded-lg px-4 py-2 bg-gray-50" type="text" value="Hyperledger Fabric v2.5" readonly/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">&#x1F916; AI Engine</label>
+                        <input class="w-full border rounded-lg px-4 py-2 bg-gray-50" type="text" value="Ollama + Qwen 2.5 (3B) — Self-hosted" readonly/>
                     </div>
                     <div>
                         <h3 class="font-bold mb-3">&#x1F4B0; Cashback Settings</h3>
-                        <div>
-                            <label class="block text-sm font-semibold mb-2">
-                                Per Verification Cashback (&#x20B9;)
-                            </label>
-                            <input class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                                type="number" value="20"/>
-                        </div>
+                        <label class="block text-sm font-semibold mb-2">Per Verification Cashback (&#x20B9;)</label>
+                        <input class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500" type="number" value="20"/>
+                    </div>
+                    <div>
+                        <h3 class="font-bold mb-3">&#x2B50; Bee Credits Settings</h3>
+                        <label class="block text-sm font-semibold mb-2">Credits per verified bottle scan (farmer)</label>
+                        <input class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500" type="number" value="5"/>
                     </div>
                     <button class="w-full bg-orange-500 text-white py-3 rounded-lg font-semibold hover:bg-orange-600 transition">
                         <span class="emoji">&#x1F4BE;</span> Save Settings
@@ -652,41 +564,51 @@
 
 </div><!-- end main-content -->
 
-<!-- Bottom Navigation (Mobile) -->
+<!-- Bottom Nav (Mobile) — 4 tabs -->
 <nav class="sidebar md:hidden bg-gray-800 text-white">
     <div class="flex justify-around py-3">
         <button class="flex flex-col items-center" onclick="showScreen('dashboard')">
             <span class="text-xl mb-1 emoji">&#x1F4CA;</span>
             <span class="text-xs">Dashboard</span>
         </button>
-        <button class="flex flex-col items-center" onclick="showScreen('farmers')">
+        <button class="flex flex-col items-center" onclick="showScreen('onboarding')">
             <span class="text-xl mb-1 emoji">&#x1F468;&#x200D;&#x1F33E;</span>
-            <span class="text-xs">Farmers</span>
-        </button>
-        <button class="flex flex-col items-center" onclick="showScreen('honeyBatches')">
-            <span class="text-xl mb-1 emoji">&#x1F36F;</span>
-            <span class="text-xs">Batches</span>
+            <span class="text-xs">Onboarding</span>
         </button>
         <button class="flex flex-col items-center" onclick="showScreen('blockchain')">
             <span class="text-xl mb-1 emoji">&#x26D3;&#xFE0F;</span>
             <span class="text-xs">Blockchain</span>
         </button>
+        <button class="flex flex-col items-center" onclick="showScreen('fraudAlerts')">
+            <span class="text-xl mb-1 emoji">&#x1F6A8;</span>
+            <span class="text-xs">Fraud</span>
+        </button>
     </div>
 </nav>
 
+<!-- Demo Badge -->
+<div style="position:fixed;bottom:8px;left:8px;background:#fef3c7;color:#92400e;
+    padding:4px 10px;border-radius:8px;font-size:12px;z-index:9999">
+    Demo data &middot; Phase 2 prototype
+</div>
+
 <script>
+    function setActive(btn) {
+        document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
+        btn.classList.add('active');
+    }
+
     function showScreen(screenName) {
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
         document.getElementById(screenName).classList.add('active');
-        document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
     }
 
     function showNotifications() {
         alert(
-            '&#x1F514; System Alerts:\n\n' +
-            '&#x26A0;&#xFE0F; Suspicious QR scan detected\n' +
-            '&#x1F41D; Low hive health — Farmer F045\n' +
-            '&#x1F4BB; API response time high'
+            '&#x1F514; System Alerts (3):\n\n' +
+            '&#x26A0;&#xFE0F; Suspicious QR scan — Mumbai + Delhi 7 min apart\n' +
+            '&#x1F41D; Hive #5 temp high — Ramesh Sharma, Mathura (38\u00B0C)\n' +
+            '&#x1F4BB; API response time high: 450ms'
         );
     }
 
@@ -696,21 +618,37 @@
             'Required Fields:\n' +
             '&#x2022; Full Name\n' +
             '&#x2022; Phone Number\n' +
-            '&#x2022; Location\n' +
-            '&#x2022; Experience (Years)\n' +
+            '&#x2022; Aadhaar (masked: XXXX-XXXX-XXXX)\n' +
             '&#x2022; KVIC ID\n' +
-            '&#x2022; Number of Hives'
+            '&#x2022; Location (District, State)\n' +
+            '&#x2022; Number of Hives\n' +
+            '&#x2022; Experience (Years)'
         );
     }
 
     function viewFarmerDetails(farmerId) {
-        alert(
-            '&#x1F468;&#x200D;&#x1F33E; Farmer ' + farmerId + ' Details:\n\n' +
-            '&#x2022; Total Hives: 5\n' +
-            '&#x2022; Bee Credits: 250\n' +
-            '&#x2022; Verified Batches: 12\n' +
-            '&#x2022; Status: &#x2705; Active'
-        );
+        const data = {
+            'F001': 'Ramesh Sharma\nLocation: Mathura, Uttar Pradesh\nHives: 5 | Bee Credits: 250\nAadhaar: XXXX-XXXX-4821\nStatus: \u2705 Active',
+            'F002': 'Priya Singh\nLocation: Jaipur, Rajasthan\nHives: 12 | Bee Credits: 180\nAadhaar: XXXX-XXXX-5590\nStatus: \u2705 Active',
+            'F003': 'Mohan Patel\nLocation: Ahmedabad, Gujarat\nHives: 8 | Bee Credits: 320\nAadhaar: XXXX-XXXX-3314\nStatus: \u2705 Active'
+        };
+        alert('&#x1F468;&#x200D;&#x1F33E; Farmer ' + farmerId + ' Details:\n\n' + (data[farmerId] || 'Not found'));
+    }
+
+    function generateCodes() {
+        alert('&#x1F4E5; Generating QR + Cap Codes...\n\n&#x2705; 50 unique QR codes generated\n&#x2705; 50 unique 6-character Cap PINs generated\n&#x1F4C4; PDF ready to download!\n\nNote: Each Cap PIN is single-use and auto-disabled after first scan.');
+    }
+
+    // Fraud alert auto-popup on Fraud Alerts screen
+    const originalShowScreen = window.showScreen || function(){};
+    function showScreen(screenName) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById(screenName).classList.add('active');
+        if (screenName === 'fraudAlerts') {
+            setTimeout(() => {
+                document.getElementById('fraudAlertDemo').style.display = 'block';
+            }, 4000);
+        }
     }
 </script>
 </body>

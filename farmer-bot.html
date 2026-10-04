@@ -10,95 +10,30 @@
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@300;400;600;700;900&family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
+        * { margin:0; padding:0; box-sizing:border-box; }
         body {
-            font-family: 'Noto Sans Devanagari', 'Poppins', sans-serif;
-            background: #0f1419;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            font-family:'Noto Sans Devanagari','Poppins',sans-serif;
+            background:#0f1419;
+            -webkit-font-smoothing:antialiased;
         }
-
-        .telegram-bg {
-            background: linear-gradient(180deg, #0088cc 0%, #006699 100%);
-        }
-
-        .chat-container {
-            max-width: 600px;
-            height: 100vh;
-            background: #0f1419;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .message-bubble {
-            animation: slideIn 0.3s ease-out;
-            max-width: 80%;
-            word-wrap: break-word;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        .typing-indicator {
-            display: inline-block;
-            width: 8px; height: 8px;
-            border-radius: 50%;
-            background: #8b949e;
-            animation: typing 1.4s infinite;
-        }
-        .typing-indicator:nth-child(2) { animation-delay: 0.2s; }
-        .typing-indicator:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes typing {
-            0%, 60%, 100% { transform: translateY(0);    opacity: 0.7; }
-            30%            { transform: translateY(-10px); opacity: 1;   }
-        }
-
-        .bot-avatar {
-            width: 40px; height: 40px;
-            background: linear-gradient(135deg, #0088cc, #006699);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 20px;
-        }
-
-        .user-avatar {
-            width: 40px; height: 40px;
-            background: linear-gradient(135deg, #ff9500, #ff6b00);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 20px;
-        }
-
-        .quick-btn {
-            transition: all 0.2s;
-        }
-        .quick-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(0,136,204,0.3);
-        }
-
-        .screen { display: none; }
-        .screen.active { display: flex; }
-
-        .hive-card { transition: all 0.3s; }
-        .hive-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,136,204,0.2);
-        }
-
-        input:focus, select:focus {
-            outline: none;
-            border-color: #0088cc;
-            box-shadow: 0 0 0 3px rgba(0,136,204,0.1);
-        }
-
-        .emoji {
-            font-family: "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;
-        }
+        .telegram-bg { background:linear-gradient(180deg,#0088cc 0%,#006699 100%); }
+        .chat-container { max-width:600px; height:100vh; background:#0f1419; display:flex; flex-direction:column; }
+        .message-bubble { animation:slideIn 0.3s ease-out; max-width:80%; word-wrap:break-word; }
+        @keyframes slideIn { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+        .typing-indicator { display:inline-block; width:8px; height:8px; border-radius:50%; background:#8b949e; animation:typing 1.4s infinite; }
+        .typing-indicator:nth-child(2){animation-delay:0.2s;}
+        .typing-indicator:nth-child(3){animation-delay:0.4s;}
+        @keyframes typing { 0%,60%,100%{transform:translateY(0);opacity:0.7;} 30%{transform:translateY(-10px);opacity:1;} }
+        .bot-avatar { width:40px;height:40px;background:linear-gradient(135deg,#0088cc,#006699);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px; }
+        .user-avatar { width:40px;height:40px;background:linear-gradient(135deg,#ff9500,#ff6b00);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px; }
+        .quick-btn { transition:all 0.2s; }
+        .quick-btn:hover { transform:scale(1.05); box-shadow:0 4px 12px rgba(0,136,204,0.3); }
+        .screen { display:none; }
+        .screen.active { display:flex; }
+        .hive-card { transition:all 0.3s; }
+        .hive-card:hover { transform:translateY(-5px); box-shadow:0 8px 20px rgba(0,136,204,0.2); }
+        input:focus,select:focus { outline:none; border-color:#0088cc; box-shadow:0 0 0 3px rgba(0,136,204,0.1); }
+        .emoji { font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif; }
     </style>
 </head>
 <body class="bg-gray-900">
@@ -124,27 +59,27 @@
         <div class="bg-gray-800 rounded-2xl shadow-2xl p-8 max-w-md w-full">
             <div class="text-center mb-8">
                 <div class="text-6xl mb-4 emoji">&#x1F36F;&#x1F41D;</div>
-                <h2 class="text-3xl font-bold mb-2 text-white">Welcome to MadhuChain</h2>
-                <p class="text-gray-400">&#x1F4AC; Select Language / &#x092D;&#x093E;&#x0937;&#x093E; &#x091A;&#x0941;&#x0928;&#x0947;&#x0902;</p>
+                <h2 class="text-3xl font-bold mb-2 text-white">MadhuChain Farmer Bot</h2>
+                <p class="text-gray-400">&#x1F4AC; &#x092D;&#x093E;&#x0937;&#x093E; &#x091A;&#x0941;&#x0928;&#x0947;&#x0902; / Select Language</p>
             </div>
             <div class="space-y-4">
                 <button class="w-full bg-orange-500 text-white py-4 rounded-xl hover:bg-orange-600 font-semibold text-lg transition transform hover:scale-105"
                     onclick="selectLanguage('hindi')">
-                    <span class="text-2xl mr-2 emoji">&#x1F1EE;&#x1F1F3;</span> &#x0939;&#x093F;&#x0902;&#x0926;&#x0940;
+                    <span class="emoji">&#x1F1EE;&#x1F1F3;</span> &#x0939;&#x093F;&#x0902;&#x0926;&#x0940;
                 </button>
                 <button class="w-full bg-orange-500 text-white py-4 rounded-xl hover:bg-orange-600 font-semibold text-lg transition transform hover:scale-105"
                     onclick="selectLanguage('english')">
-                    <span class="text-2xl mr-2 emoji">&#x1F1EC;&#x1F1E7;</span> English
+                    <span class="emoji">&#x1F1EC;&#x1F1E7;</span> English
                 </button>
                 <button class="w-full bg-orange-500 text-white py-4 rounded-xl hover:bg-orange-600 font-semibold text-lg transition transform hover:scale-105"
                     onclick="selectLanguage('hinglish')">
-                    <span class="text-2xl mr-2 emoji">&#x1F500;</span> Hinglish
+                    <span class="emoji">&#x1F500;</span> Hinglish
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- SCREEN 2: Chat Interface -->
+    <!-- SCREEN 2: Chat -->
     <div class="screen flex-1 flex-col bg-gray-900" id="chatScreen">
         <div class="flex-1 overflow-y-auto p-4 space-y-4" id="chatMessages"></div>
 
@@ -163,34 +98,32 @@
         <!-- Quick Actions -->
         <div class="p-4 bg-gray-800 border-t border-gray-700">
             <div class="flex justify-around gap-2 mb-3">
-                <button class="quick-btn bg-gray-700 text-white px-4 py-2 rounded-xl text-sm font-semibold hover:bg-gray-600 transition flex-1"
+                <button class="quick-btn bg-gray-700 text-white px-3 py-2 rounded-xl text-xs font-semibold hover:bg-gray-600 transition flex-1"
                     onclick="quickQuery('hives')">
                     <span class="emoji">&#x1F41D;</span> &#x0939;&#x093E;&#x0907;&#x0935;
                 </button>
-                <button class="quick-btn bg-gray-700 text-white px-4 py-2 rounded-xl text-sm font-semibold hover:bg-gray-600 transition flex-1"
+                <button class="quick-btn bg-gray-700 text-white px-3 py-2 rounded-xl text-xs font-semibold hover:bg-gray-600 transition flex-1"
                     onclick="quickQuery('credits')">
                     <span class="emoji">&#x2B50;</span> &#x0915;&#x094D;&#x0930;&#x0947;&#x0921;&#x093F;&#x091F;
                 </button>
-                <button class="quick-btn bg-gray-700 text-white px-4 py-2 rounded-xl text-sm font-semibold hover:bg-gray-600 transition flex-1"
+                <button class="quick-btn bg-gray-700 text-white px-3 py-2 rounded-xl text-xs font-semibold hover:bg-gray-600 transition flex-1"
                     onclick="quickQuery('weather')">
                     <span class="emoji">&#x1F326;&#xFE0F;</span> &#x092E;&#x094C;&#x0938;&#x092E;
                 </button>
-                <button class="quick-btn bg-gray-700 text-white px-4 py-2 rounded-xl text-sm font-semibold hover:bg-gray-600 transition flex-1"
+                <button class="quick-btn bg-gray-700 text-white px-3 py-2 rounded-xl text-xs font-semibold hover:bg-gray-600 transition flex-1"
                     onclick="quickQuery('help')">
                     <span class="emoji">&#x2753;</span> &#x092E;&#x0926;&#x0926;
                 </button>
             </div>
-
-            <!-- Input Area -->
             <div class="flex items-center space-x-2">
                 <input class="flex-1 bg-gray-700 text-white border-0 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-500"
                     id="messageInput"
                     onkeypress="if(event.key==='Enter') sendMessage()"
                     placeholder="&#x0915;&#x0941;&#x091B; &#x092D;&#x0940; &#x092A;&#x0942;&#x091B;&#x0947;&#x0902;..."
                     type="text"/>
-                <button class="bg-orange-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-orange-600 transition"
+                <button class="bg-orange-500 text-white px-5 py-3 rounded-xl font-semibold hover:bg-orange-600 transition"
                     onclick="sendMessage()">
-                    &#x1F4E4; &#x092D;&#x0947;&#x091C;&#x0947;&#x0902;
+                    &#x1F4E4;
                 </button>
             </div>
         </div>
@@ -205,9 +138,23 @@
                     <span class="emoji">&#x1F3E0;</span> &#x092E;&#x0947;&#x0930;&#x0940; &#x0939;&#x093E;&#x0907;&#x0935;&#x094D;&#x0938;
                 </h2>
                 <button class="text-orange-500 text-sm font-semibold hover:text-orange-400" onclick="refreshHives()">
-                    <span class="emoji">&#x1F504;</span> &#x0930;&#x093F;&#x092B;&#x094D;&#x0930;&#x0947;&#x0936;
+                    <span class="emoji">&#x1F504;</span> Refresh
                 </button>
             </div>
+
+            <!-- Hive Status Report — farmer gives input -->
+            <div class="bg-gray-800 rounded-xl p-4 mb-4 border border-orange-500">
+                <p class="text-orange-400 text-sm font-semibold mb-2">&#x1F4DD; Aaj ka hive theek hai?</p>
+                <div class="flex gap-2">
+                    <button onclick="reportHiveOk()" class="flex-1 bg-green-600 text-white py-2 rounded-lg text-sm font-semibold hover:bg-green-700">
+                        &#x2705; Haan, theek hai
+                    </button>
+                    <button onclick="reportHiveProblem()" class="flex-1 bg-red-600 text-white py-2 rounded-lg text-sm font-semibold hover:bg-red-700">
+                        &#x274C; Problem hai
+                    </button>
+                </div>
+            </div>
+
             <div class="grid md:grid-cols-2 gap-4" id="hivesContainer"></div>
         </div>
     </div>
@@ -218,71 +165,62 @@
             <div class="flex items-center mb-6">
                 <button class="text-gray-400 text-2xl hover:text-white mr-4 emoji" onclick="showScreen('chatScreen')">&#x2190;</button>
                 <h2 class="text-2xl font-bold text-white">
-                    <span class="emoji">&#x2B50;</span> &#x092C;&#x0940; &#x0915;&#x094D;&#x0930;&#x0947;&#x0921;&#x093F;&#x091F;&#x094D;&#x0938;
+                    <span class="emoji">&#x2B50;</span> Bee Credits
                 </h2>
             </div>
-
             <div class="bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-2xl p-6 mb-6 shadow-xl">
                 <div class="text-center">
                     <div class="text-5xl mb-2 emoji">&#x1F41D;</div>
-                    <div class="text-xl mb-2">&#x092E;&#x0947;&#x0930;&#x0947; &#x0915;&#x094D;&#x0930;&#x0947;&#x0921;&#x093F;&#x091F;&#x094D;&#x0938;</div>
+                    <div class="text-xl mb-2">&#x092E;&#x0947;&#x0930;&#x0947; Bee Credits</div>
                     <div class="text-6xl font-bold" id="totalCredits">95</div>
                 </div>
             </div>
-
             <div class="space-y-4 mb-6">
                 <h3 class="font-bold text-lg text-white">&#x1F4C8; &#x0915;&#x092E;&#x093E;&#x0928;&#x0947; &#x0915;&#x0947; &#x0924;&#x0930;&#x0940;&#x0915;&#x0947;</h3>
                 <div class="flex justify-between items-center p-4 bg-green-900 bg-opacity-30 rounded-xl">
                     <div>
-                        <div class="font-semibold text-white">&#x2705; QR &#x0938;&#x094D;&#x0915;&#x0948;&#x0928;</div>
-                        <div class="text-sm text-gray-400">&#x092A;&#x094D;&#x0930;&#x0924;&#x093F; &#x0938;&#x094D;&#x0915;&#x0948;&#x0928;</div>
+                        <div class="font-semibold text-white">&#x2705; Consumer ne bottle verify ki</div>
+                        <div class="text-sm text-gray-400">Har verified bottle par</div>
                     </div>
                     <div class="text-2xl font-bold text-green-400">+5</div>
                 </div>
                 <div class="flex justify-between items-center p-4 bg-green-900 bg-opacity-30 rounded-xl">
                     <div>
-                        <div class="font-semibold text-white">&#x1F41D; &#x0939;&#x093E;&#x0907;&#x0935; &#x0905;&#x092A;&#x0921;&#x0947;&#x091F;</div>
-                        <div class="text-sm text-gray-400">&#x092A;&#x094D;&#x0930;&#x0924;&#x093F; &#x0905;&#x092A;&#x0921;&#x0947;&#x091F;</div>
+                        <div class="font-semibold text-white">&#x1F41D; Hive Status Update</div>
+                        <div class="text-sm text-gray-400">Har update par</div>
                     </div>
                     <div class="text-2xl font-bold text-green-400">+10</div>
                 </div>
                 <div class="flex justify-between items-center p-4 bg-green-900 bg-opacity-30 rounded-xl">
                     <div>
-                        <div class="font-semibold text-white">&#x26D3;&#xFE0F; &#x092C;&#x094D;&#x0932;&#x0949;&#x0915;&#x091A;&#x0947;&#x0928; &#x0935;&#x0947;&#x0930;&#x093F;&#x092B;&#x093E;&#x0908;</div>
-                        <div class="text-sm text-gray-400">&#x0938;&#x092B;&#x0932; &#x0935;&#x0947;&#x0930;&#x093F;&#x092B;&#x093F;&#x0915;&#x0947;&#x0936;&#x0928; &#x092A;&#x0930;</div>
+                        <div class="font-semibold text-white">&#x26D3;&#xFE0F; Blockchain Verified Batch</div>
+                        <div class="text-sm text-gray-400">Successful verification par</div>
                     </div>
                     <div class="text-2xl font-bold text-green-400">+20</div>
                 </div>
             </div>
-
             <div class="space-y-4">
-                <h3 class="font-bold text-lg text-white">&#x1F381; &#x0930;&#x093F;&#x0935;&#x093E;&#x0930;&#x094D;&#x0921;&#x094D;&#x0938;</h3>
+                <h3 class="font-bold text-lg text-white">&#x1F381; Rewards (DBT Subsidy)</h3>
                 <div class="flex justify-between items-center p-4 bg-gray-800 rounded-xl">
                     <div>
-                        <div class="font-semibold text-white">&#x1F69A; &#x092B;&#x094D;&#x0930;&#x0940; &#x0936;&#x093F;&#x092A;&#x093F;&#x0902;&#x0917;</div>
-                        <div class="text-sm text-gray-400">200 &#x0915;&#x094D;&#x0930;&#x0947;&#x0921;&#x093F;&#x091F;&#x094D;&#x0938;</div>
+                        <div class="font-semibold text-white">&#x1F69A; Free Shipping</div>
+                        <div class="text-sm text-gray-400">200 Credits</div>
                     </div>
-                    <button class="bg-orange-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600">
-                        &#x0930;&#x093F;&#x0921;&#x0940;&#x092E; &#x0915;&#x0930;&#x0947;&#x0902;
-                    </button>
+                    <button class="bg-orange-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600">Redeem</button>
                 </div>
                 <div class="flex justify-between items-center p-4 bg-gray-800 rounded-xl">
                     <div>
-                        <div class="font-semibold text-white">&#x1F6CD;&#xFE0F; &#x0921;&#x093F;&#x0938;&#x094D;&#x0915;&#x093E;&#x0909;&#x0902;&#x091F;</div>
-                        <div class="text-sm text-gray-400">500 &#x0915;&#x094D;&#x0930;&#x0947;&#x0921;&#x093F;&#x091F;&#x094D;&#x0938;</div>
+                        <div class="font-semibold text-white">&#x1F6CD;&#xFE0F; Discount Voucher</div>
+                        <div class="text-sm text-gray-400">500 Credits</div>
                     </div>
-                    <button class="bg-orange-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600">
-                        &#x0930;&#x093F;&#x0921;&#x0940;&#x092E; &#x0915;&#x0930;&#x0947;&#x0902;
-                    </button>
+                    <button class="bg-orange-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600">Redeem</button>
                 </div>
                 <div class="flex justify-between items-center p-4 bg-gray-800 rounded-xl">
                     <div>
-                        <div class="font-semibold text-white">&#x1F4DC; &#x0938;&#x0930;&#x094D;&#x091F;&#x093F;&#x092B;&#x093F;&#x0915;&#x0947;&#x091F;</div>
-                        <div class="text-sm text-gray-400">300 &#x0915;&#x094D;&#x0930;&#x0947;&#x0921;&#x093F;&#x091F;&#x094D;&#x0938;</div>
+                        <div class="font-semibold text-white">&#x1F4DC; KVIC Certificate</div>
+                        <div class="text-sm text-gray-400">300 Credits</div>
                     </div>
-                    <button class="bg-orange-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600">
-                        &#x0930;&#x093F;&#x0921;&#x0940;&#x092E; &#x0915;&#x0930;&#x0947;&#x0902;
-                    </button>
+                    <button class="bg-orange-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600">Redeem</button>
                 </div>
             </div>
         </div>
@@ -294,33 +232,36 @@
             <div class="flex items-center mb-6">
                 <button class="text-gray-400 text-2xl hover:text-white mr-4 emoji" onclick="showScreen('chatScreen')">&#x2190;</button>
                 <h2 class="text-2xl font-bold text-white">
-                    <span class="emoji">&#x1F514;</span> &#x0928;&#x094B;&#x091F;&#x093F;&#x092B;&#x093F;&#x0915;&#x0947;&#x0936;&#x0928;
+                    <span class="emoji">&#x1F514;</span> Notifications
                 </h2>
             </div>
             <div class="space-y-3">
                 <div class="bg-gray-800 rounded-xl p-4">
                     <div class="flex items-center justify-between mb-2">
                         <label class="font-semibold text-white">
-                            <span class="emoji">&#x1F304;</span> &#x0938;&#x0941;&#x092C;&#x0939; &#x0915;&#x0940; &#x092F;&#x093E;&#x0926; (4 AM)
+                            <span class="emoji">&#x1F304;</span> 4:00 AM Morning Hive Status
                         </label>
                         <input checked class="w-6 h-6 accent-orange-500" type="checkbox"/>
                     </div>
+                    <p class="text-xs text-gray-400">Temperature, humidity, health, honey fill</p>
                 </div>
                 <div class="bg-gray-800 rounded-xl p-4">
                     <div class="flex items-center justify-between mb-2">
                         <label class="font-semibold text-white">
-                            <span class="emoji">&#x1F306;</span> &#x0936;&#x093E;&#x092E; &#x0915;&#x0940; &#x092F;&#x093E;&#x0926; (4 PM)
+                            <span class="emoji">&#x1F306;</span> 4:00 PM Evening Yield Summary
                         </label>
                         <input checked class="w-6 h-6 accent-orange-500" type="checkbox"/>
                     </div>
+                    <p class="text-xs text-gray-400">Yield update &amp; beekeeping care tips</p>
                 </div>
                 <div class="bg-gray-800 rounded-xl p-4">
                     <div class="flex items-center justify-between mb-2">
                         <label class="font-semibold text-white">
-                            <span class="emoji">&#x1F319;</span> &#x0930;&#x093E;&#x0924; &#x0915;&#x0940; &#x092F;&#x093E;&#x0926; (8 PM)
+                            <span class="emoji">&#x26A0;&#xFE0F;</span> Weather-based Risk Alerts
                         </label>
                         <input checked class="w-6 h-6 accent-orange-500" type="checkbox"/>
                     </div>
+                    <p class="text-xs text-gray-400">Alert when hive temperature exceeds safe range</p>
                 </div>
             </div>
         </div>
@@ -332,12 +273,12 @@
             <div class="flex items-center mb-6">
                 <button class="text-gray-400 text-2xl hover:text-white mr-4 emoji" onclick="showScreen('chatScreen')">&#x2190;</button>
                 <h2 class="text-2xl font-bold text-white">
-                    <span class="emoji">&#x2699;&#xFE0F;</span> &#x0938;&#x0947;&#x091F;&#x093F;&#x0902;&#x0917;&#x094D;&#x0938;
+                    <span class="emoji">&#x2699;&#xFE0F;</span> Settings
                 </h2>
             </div>
             <div class="space-y-4">
                 <div class="bg-gray-800 rounded-xl p-4">
-                    <h3 class="font-bold mb-3 text-white">&#x1F4AC; &#x092D;&#x093E;&#x0937;&#x093E;</h3>
+                    <h3 class="font-bold mb-3 text-white">&#x1F4AC; &#x092D;&#x093E;&#x0937;&#x093E; / Language</h3>
                     <select class="w-full bg-gray-700 text-white border-0 rounded-lg px-4 py-3 focus:ring-2 focus:ring-orange-500"
                         onchange="changeLanguage(this.value)">
                         <option value="hindi">&#x0939;&#x093F;&#x0902;&#x0926;&#x0940;</option>
@@ -345,9 +286,8 @@
                         <option value="hinglish">Hinglish</option>
                     </select>
                 </div>
-
                 <div class="bg-gray-800 rounded-xl p-4">
-                    <h3 class="font-bold mb-3 text-white">&#x1F468;&#x200D;&#x1F33E; &#x092A;&#x094D;&#x0930;&#x094B;&#x092B;&#x093E;&#x0907;&#x0932;</h3>
+                    <h3 class="font-bold mb-3 text-white">&#x1F468;&#x200D;&#x1F33E; Profile</h3>
                     <div class="space-y-3">
                         <div class="flex justify-between text-sm">
                             <span class="text-gray-400">Farmer ID</span>
@@ -355,17 +295,20 @@
                         </div>
                         <div class="flex justify-between text-sm">
                             <span class="text-gray-400">&#x0928;&#x093E;&#x092E;</span>
-                            <span class="font-semibold text-white">&#x0930;&#x093E;&#x091C;&#x0947;&#x0936; &#x0915;&#x0941;&#x092E;&#x093E;&#x0930;</span>
+                            <span class="font-semibold text-white">Ramesh Sharma</span>
                         </div>
                         <div class="flex justify-between text-sm">
-                            <span class="text-gray-400">&#x0938;&#x094D;&#x0925;&#x093E;&#x0928;</span>
-                            <span class="font-semibold text-white">&#x092A;&#x0941;&#x0923;&#x0947;, &#x092E;&#x0939;&#x093E;&#x0930;&#x093E;&#x0937;&#x094D;&#x0924;&#x094D;&#x0930;</span>
+                            <span class="text-gray-400">&#x1F4CD; &#x0938;&#x094D;&#x0925;&#x093E;&#x0928;</span>
+                            <span class="font-semibold text-white">Mathura, Uttar Pradesh</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-400">Aadhaar</span>
+                            <span class="font-semibold text-white">XXXX-XXXX-4821</span>
                         </div>
                     </div>
                 </div>
-
                 <button class="w-full bg-red-600 text-white py-3 rounded-xl font-semibold hover:bg-red-700 transition">
-                    &#x1F6AA; &#x0932;&#x0949;&#x0917;&#x0906;&#x0909;&#x091F;
+                    &#x1F6AA; Logout
                 </button>
             </div>
         </div>
@@ -373,27 +316,31 @@
 
 </div><!-- end chat-container -->
 
+<!-- Demo Badge -->
+<div style="position:fixed;bottom:8px;left:8px;background:#fef3c7;color:#92400e;
+    padding:4px 10px;border-radius:8px;font-size:12px;z-index:9999">
+    Demo data &middot; Phase 2 prototype
+</div>
+
 <script>
     let selectedLanguage = 'hindi';
-
     let farmerData = {
-        name: '\u0930\u093E\u091C\u0947\u0936 \u0915\u0941\u092E\u093E\u0930',
+        name: 'Ramesh Sharma',
         farmerId: 'F001',
-        location: '\u092A\u0941\u0923\u0947, \u092E\u0939\u093E\u0930\u093E\u0937\u094D\u0924\u094D\u0930',
+        location: 'Mathura, Uttar Pradesh',
         totalHives: 5,
         beeCredits: 95,
         hives: [
-            { id:1, honey:80, temp:32, humidity:65, health:'\u0938\u094D\u0935\u0938\u094D\u0925', status:'\u0905\u091A\u094D\u091B\u093E', alert:null },
-            { id:2, honey:95, temp:31, humidity:63, health:'\u0938\u094D\u0935\u0938\u094D\u0925', status:'\u0905\u091A\u094D\u091B\u093E', alert:null },
-            { id:3, honey:60, temp:31, humidity:64, health:'\u0938\u094D\u0935\u0938\u094D\u0925', status:'\u0905\u091A\u094D\u091B\u093E', alert:null },
-            { id:4, honey:45, temp:33, humidity:66, health:'\u0938\u094D\u0935\u0938\u094D\u0925', status:'\u0905\u091A\u094D\u091B\u093E', alert:null },
-            { id:5, honey:50, temp:38, humidity:70, health:'\u0927\u094D\u092F\u093E\u0928 \u0926\u0947\u0902',
-              status:'\u0926\u0947\u0916\u092D\u093E\u0932 \u091C\u0930\u0942\u0930\u0940',
-              alert:'&#x26A0;&#xFE0F; \u0924\u093E\u092A\u092E\u093E\u0928 \u0905\u0927\u093F\u0915 \u0939\u0948! \u0915\u0943\u092A\u092F\u093E \u0927\u094D\u092F\u093E\u0928 \u0926\u0947\u0902 (38\u00B0C)' }
+            { id:1, honey:80, temp:32, humidity:65, health:'&#x0938;&#x094D;&#x0935;&#x0938;&#x094D;&#x0925;', status:'&#x2705;', alert:null },
+            { id:2, honey:95, temp:31, humidity:63, health:'&#x0938;&#x094D;&#x0935;&#x0938;&#x094D;&#x0925;', status:'&#x2705;', alert:null },
+            { id:3, honey:60, temp:31, humidity:64, health:'&#x0938;&#x094D;&#x0935;&#x0938;&#x094D;&#x0925;', status:'&#x2705;', alert:null },
+            { id:4, honey:45, temp:33, humidity:66, health:'&#x0938;&#x094D;&#x0935;&#x0938;&#x094D;&#x0925;', status:'&#x2705;', alert:null },
+            { id:5, honey:50, temp:38, humidity:70, health:'&#x0927;&#x094D;&#x092F;&#x093E;&#x0928; &#x0926;&#x0947;&#x0902;',
+              status:'&#x26A0;&#xFE0F;',
+              alert:'&#x26A0;&#xFE0F; &#x0924;&#x093E;&#x092A;&#x092E;&#x093E;&#x0928; &#x0905;&#x0927;&#x093F;&#x0915; &#x0939;&#x0948;! 6-7 hives damage hone par &#x20B9;14,000 season loss hota hai. Abhi dhyan den (38&deg;C)' }
         ]
     };
 
-    /* ---------- Screen ---------- */
     function showScreen(name) {
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
         document.getElementById(name).classList.add('active');
@@ -401,7 +348,6 @@
         if (name === 'chatScreen') scrollToBottom();
     }
 
-    /* ---------- Language ---------- */
     function selectLanguage(lang) {
         selectedLanguage = lang;
         showScreen('chatScreen');
@@ -410,42 +356,39 @@
 
     function getWelcomeMessage(lang) {
         const msgs = {
-            hindi: '\u0928\u092E\u0938\u094D\u0924\u0947 \u0930\u093E\u091C\u0947\u0936 \u0915\u0941\u092E\u093E\u0930! &#x1F64F;\n\n\u092E\u0948\u0902 \u0906\u092A\u0915\u0940 MadhuChain \u0938\u0939\u093E\u092F\u0915 \u0939\u0942\u0902! &#x1F41D;\n\u0906\u091C \u092E\u0948\u0902 \u0906\u092A\u0915\u0940 \u092E\u0927\u0941\u092E\u0915\u094D\u0916\u0940 \u092A\u093E\u0932\u0928 \u092E\u0947\u0902 \u092E\u0926\u0926 \u0915\u0930\u0942\u0902\u0917\u0940\u0964\n\n&#x1F31F; \u0906\u092A \u092E\u0941\u091D\u0938\u0947 \u0915\u0941\u091B; \u092D\u0940; \u092A\u0942\u091B \u0938\u0915\u0924\u0947; \u0939\u0948\u0902:\n\u2022 \u092E\u0947\u0930\u0940 \u0939\u093E\u0907\u0935\u094D\u0938 \u0915\u0948\u0938\u0940 \u0939\u0948\u0902?\n\u2022 \u0906\u091C \u0915\u093E \u092E\u094C\u0938\u092E \u0915\u0948\u0938\u093E \u0939\u0948?\n\u2022 \u092C\u0940 \u0915\u094D\u0930\u0947\u0921\u093F\u091F\u094D\u0938 \u0915\u093F\u0924\u0928\u0947 \u0939\u0948\u0902?\n\n\u091A\u0932\u093F\u090F \u0936\u0941\u0930\u0942 \u0915\u0930\u0924\u0947 \u0939\u0948\u0902! &#x1F680;',
-            english: 'Hello Rajesh Kumar! &#x1F44B;\n\nI am your MadhuChain digital assistant! &#x1F41D;\nI will help you with beekeeping today.\n\n&#x1F31F; You can ask me anything:\n\u2022 How are my hives?\n\u2022 What is the weather today?\n\u2022 How many Bee Credits do I have?\n\nLet us start! &#x1F680;',
-            hinglish: 'Hello Rajesh Kumar ji! &#x1F44B;\n\nMain aapki MadhuChain digital assistant hoon! &#x1F41D;\nMain aaj aapki beekeeping mein help karungi.\n\n&#x1F31F; Aap mujhse kuch bhi pooch sakte hain:\n\u2022 Meri hives kaisi hain?\n\u2022 Aaj ka mausam kaisa hai?\n\u2022 Bee Credits kitne hain?\n\nLet us start! &#x1F680;'
+            hindi: '&#x1F64F; Namaste Ramesh Sharma ji!\n\nMain aapki MadhuChain AI assistant hoon. &#x1F41D;\nMain sirf madhumakhi palan ki baatein karta hoon.\n\n&#x1F31F; Aap pooch sakte hain:\n&#x2022; Meri hives kaisi hain?\n&#x2022; Aaj ka mausam kaisa hai?\n&#x2022; Mere Bee Credits kitne hain?\n\nChalie shuru karte hain! &#x1F680;\n\n&#x2139;&#xFE0F; AI: Ollama + Qwen 2.5 (self-hosted)',
+            english: '&#x1F44B; Hello Ramesh Sharma!\n\nI am your MadhuChain AI assistant. &#x1F41D;\nI give strictly beekeeping advice only.\n\n&#x1F31F; You can ask:\n&#x2022; How are my hives?\n&#x2022; What is today\'s weather risk?\n&#x2022; How many Bee Credits do I have?\n\nLet us start! &#x1F680;\n\n&#x2139;&#xFE0F; AI: Ollama + Qwen 2.5 (self-hosted)',
+            hinglish: '&#x1F44B; Hello Ramesh Sharma ji!\n\nMain aapki MadhuChain AI assistant hoon. &#x1F41D;\nMain sirf beekeeping advice deta hoon.\n\n&#x1F31F; Aap pooch sakte hain:\n&#x2022; Meri hives kaisi hain?\n&#x2022; Aaj ka mausam?\n&#x2022; Bee Credits kitne hain?\n\nLet us start! &#x1F680;\n\n&#x2139;&#xFE0F; AI: Ollama + Qwen 2.5 (self-hosted)'
         };
         return msgs[lang];
     }
 
     function changeLanguage(lang) {
         selectedLanguage = lang;
-        alert('\u092D\u093E\u0937\u093E \u092C\u0926\u0932 \u0917\u0908! Language changed to ' + lang);
+        alert('&#x2705; Language changed to ' + lang);
     }
 
-    /* ---------- Chat ---------- */
     function addBotMessage(text) {
-        const chatMessages = document.getElementById('chatMessages');
-        const div = document.createElement('div');
-        div.className = 'flex items-start space-x-2';
-        div.innerHTML = `
+        const c = document.getElementById('chatMessages');
+        const d = document.createElement('div');
+        d.className = 'flex items-start space-x-2';
+        d.innerHTML = `
             <div class="bot-avatar emoji">&#x1F41D;</div>
             <div class="message-bubble bg-gray-800 text-white rounded-2xl rounded-tl-none px-4 py-3 max-w-xs">
-                ${text.replace(/\n/g, '<br>')}
+                ${text.replace(/\n/g,'<br>')}
             </div>`;
-        chatMessages.appendChild(div);
+        c.appendChild(d);
         scrollToBottom();
     }
 
     function addUserMessage(text) {
-        const chatMessages = document.getElementById('chatMessages');
-        const div = document.createElement('div');
-        div.className = 'flex items-start space-x-2 justify-end';
-        div.innerHTML = `
-            <div class="message-bubble bg-orange-500 text-white rounded-2xl rounded-tr-none px-4 py-3 max-w-xs">
-                ${text}
-            </div>
+        const c = document.getElementById('chatMessages');
+        const d = document.createElement('div');
+        d.className = 'flex items-start space-x-2 justify-end';
+        d.innerHTML = `
+            <div class="message-bubble bg-orange-500 text-white rounded-2xl rounded-tr-none px-4 py-3 max-w-xs">${text}</div>
             <div class="user-avatar emoji">&#x1F468;&#x200D;&#x1F33E;</div>`;
-        chatMessages.appendChild(div);
+        c.appendChild(d);
         scrollToBottom();
     }
 
@@ -469,10 +412,9 @@
     function quickQuery(type) {
         if (type === 'hives')   { showScreen('hiveDetails');   return; }
         if (type === 'credits') { showScreen('creditsDetail'); return; }
-
         const queries = {
-            weather : '&#x1F326;&#xFE0F; \u0906\u091C \u0915\u093E \u092E\u094C\u0938\u092E \u0915\u0948\u0938\u093E \u0939\u0948?',
-            help    : '&#x2753; \u092E\u0941\u091D\u0947 \u092E\u0926\u0926 \u091A\u093E\u0939\u093F\u090F'
+            weather: '&#x1F326;&#xFE0F; Aaj ka mausam kaisa hai?',
+            help: '&#x2753; Mujhe madad chahiye'
         };
         addUserMessage(queries[type]);
         showTyping();
@@ -481,39 +423,37 @@
 
     function getBotResponse(query) {
         const q = query.toLowerCase();
-        if (q.includes('hive') || q.includes('\u0939\u093E\u0907\u0935') || q.includes('weather') || q.includes('\u092E\u094C\u0938\u092E') || q === 'hives' || q === 'weather') {
-            if (q.includes('hive') || q === 'hives' || q.includes('\u0939\u093E\u0907\u0935')) {
-                return '&#x1F41D; \u0906\u092A\u0915\u0940 \u0915\u0941\u0932 5 \u0939\u093E\u0907\u0935\u094D\u0938 \u0939\u0948\u0902!\n\n&#x2705; 4 \u0939\u093E\u0907\u0935\u094D\u0938 \u0938\u094D\u0935\u0938\u094D\u0925 \u0939\u0948\u0902\n&#x26A0;&#xFE0F; 1 \u0939\u093E\u0907\u0935 \u092E\u0947\u0902 \u0924\u093E\u092A\u092E\u093E\u0928 \u0905\u0927\u093F\u0915 \u0939\u0948 (38\u00B0C)\n\n\u0935\u093F\u0938\u094D\u0924\u093E\u0930 \u0926\u0947\u0916\u0928\u0947 \u0915\u0947 \u0932\u093F\u090F "\u0939\u093E\u0907\u0935" \u092C\u091F\u0928 \u0926\u092C\u093E\u090F\u0902!';
-            }
-            return '\u0906\u091C \u0915\u093E \u092E\u094C\u0938\u092E &#x1F326;&#xFE0F;\n\n&#x1F324;&#xFE0F; \u0938\u094D\u0925\u093F\u0924\u093F: \u0938\u093E\u092B, \u0939\u0932\u094D\u0915\u0940 \u092C\u093E\u0926\u0932\n\u{1F321}&#xFE0F; \u0924\u093E\u092A\u092E\u093E\u0928: 28.5\u00B0C\n&#x1F4A7; \u0928\u092E\u0940: 65%\n\u{1F4A8} \u0939\u0935\u093E: 12 km/h\n&#x1F33B; \u092B\u0938\u0932: \u0905\u091A\u094D\u091B\u0940 \u0938\u094D\u0925\u093F\u0924\u093F\n\n\u092E\u0927\u0941\u092E\u0915\u094D\u0916\u093F\u092F\u094B\u0902 \u0915\u0947 \u0932\u093F\u090F \u0905\u091A\u094D\u091B\u093E \u0926\u093F\u0928 \u0939\u0948! &#x1F41D;';
+        if (q.includes('hive') || q.includes('&#x0939;&#x093E;&#x0907;&#x0935;')) {
+            return '&#x1F41D; Aapki kul 5 hives hain!\n\n&#x2705; 4 hives swasth hain\n&#x26A0;&#xFE0F; 1 hive ka temperature zyada hai (38&deg;C)\n\nYaad rahein: 6-7 hives damage hone par &#x20B9;14,000 season loss hota hai.\n\nDetail ke liye "Hive" button dabaen!';
         }
-        if (q.includes('credit') || q.includes('\u0915\u094D\u0930\u0947\u0921\u093F\u091F')) {
-            return '&#x2B50; \u0906\u092A\u0915\u0947 \u092A\u093E\u0938; 95 \u092C\u0940; \u0915\u094D\u0930\u0947\u0921\u093F\u091F\u094D\u0938 \u0939\u0948\u0902!\n\n\u0915\u092E\u093E\u0928\u0947 \u0915\u0947 \u0924\u0930\u0940\u0915\u0947:\n&#x2705; QR \u0938\u094D\u0915\u0948\u0928: +5\n&#x1F41D; \u0939\u093E\u0907\u0935 \u0905\u092A\u0921\u0947\u091F: +10\n&#x26D3;&#xFE0F; \u092C\u094D\u0932\u0949\u0915\u091A\u0947\u0928 \u0935\u0947\u0930\u093F\u092B\u093E\u0908: +20\n\n\u0930\u093F\u0935\u093E\u0930\u094D\u0921\u094D\u0938:\n&#x1F69A; \u092B\u094D\u0930\u0940 \u0936\u093F\u092A\u093F\u0902\u0917: 200 \u0915\u094D\u0930\u0947\u0921\u093F\u091F\u094D\u0938\n&#x1F6CD;&#xFE0F; \u0921\u093F\u0938\u094D\u0915\u093E\u0909\u0902\u091F: 500 \u0915\u094D\u0930\u0947\u0921\u093F\u091F\u094D\u0938';
+        if (q.includes('credit') || q.includes('&#x0915;&#x094D;&#x0930;&#x0947;&#x0921;&#x093F;&#x091F;')) {
+            return '&#x2B50; Aapke paas 95 Bee Credits hain!\n\n&#x0915;&#x092E;&#x093E;&#x0928;&#x0947; &#x0915;&#x0947; &#x0924;&#x0930;&#x0940;&#x0915;&#x0947;:\n&#x2705; Bottle verify: +5\n&#x1F41D; Hive update: +10\n&#x26D3;&#xFE0F; Blockchain verify: +20\n\nRewards:\n&#x1F69A; Free Shipping: 200 Credits\n&#x1F6CD;&#xFE0F; Discount: 500 Credits';
         }
-        if (q.includes('help') || q.includes('\u092E\u0926\u0926') || q === 'help') {
-            return '&#x2753; \u092E\u0948\u0902 \u0906\u092A\u0915\u0940 \u0907\u0928 \u0935\u093F\u0937\u092F\u094B\u0902 \u092E\u0947\u0902 \u092E\u0926\u0926 \u0915\u0930 \u0938\u0915\u0924\u0940 \u0939\u0942\u0902:\n\n&#x1F41D; \u0939\u093E\u0907\u0935 \u092E\u0949\u0928\u093F\u091F\u0930\u093F\u0902\u0917\n&#x2B50; \u092C\u0940 \u0915\u094D\u0930\u0947\u0921\u093F\u091F\u094D\u0938\n&#x1F326;&#xFE0F; \u092E\u094C\u0938\u092E \u091C\u093E\u0928\u0915\u093E\u0930\u0940\nQR \u0915\u094B\u0921; \u091C\u0928\u0930\u0947\u091F; \u0915\u0930\u0947\u0902\n&#x1F4CA; \u092C\u093E\u091C\u093E\u0930; \u092D\u093E\u0935\n\n\u0915\u094B\u0908; \u092D\u0940; \u0938\u0935\u093E\u0932; \u092A\u0942\u091B\u0947\u0902! &#x1F680;';
+        if (q.includes('weather') || q.includes('&#x092E;&#x094C;&#x0938;&#x092E;')) {
+            return 'Mathura, Uttar Pradesh ka aaj ka mausam &#x1F326;&#xFE0F;\n\n&#x2600;&#xFE0F; Condition: Saaf, Halki Dhoop\n&#x1F321;&#xFE0F; Temperature: 28.5&deg;C\n&#x1F4A7; Nami: 65%\n&#x1F4A8; Hawa: 12 km/h\n&#x1F33B; Fasal: Achhi Sthiti\n\n&#x1F41D; Madhumakkhiyon ke liye achha din hai!';
         }
-        return '&#x1F916; \u0915\u094D\u0937\u092E\u093E \u0915\u0930\u0947\u0902, \u092E\u0941\u091D\u0947 \u0938\u092E\u091D \u0928\u0939\u0940\u0902 \u0906\u092F\u093E\u0964 \u0915\u094D\u092F\u093E \u0906\u092A "\u092E\u0926\u0926" \u092F\u093E \u0939\u093E\u0907\u0935, \u092E\u094C\u0938\u092E, \u0915\u094D\u0930\u0947\u0921\u093F\u091F\u094D\u0938 \u0915\u0947; \u092C\u093E\u0930\u0947 \u092E\u0947\u0902; \u092A\u0942\u091B\u0928\u093E; \u091A\u093E\u0939\u0924\u0947; \u0939\u0948\u0902?';
+        if (q.includes('help') || q === 'help') {
+            return '&#x2753; Main aapki in vishyon mein madad kar sakta hoon:\n\n&#x1F41D; Hive monitoring\n&#x2B50; Bee Credits check\n&#x1F326;&#xFE0F; Mausam jankari\n&#x1F4CA; Beekeeping care tips\n\nYaad rakhein: Main sirf beekeeping advice deta hoon. &#x1F41D;';
+        }
+        return '&#x1F916; Mujhe samajh nahi aaya. Kya aap hive, mausam, credits ya beekeeping ke baare mein poochna chahte hain?';
     }
 
-    /* ---------- Hives ---------- */
     function loadHives() {
         const container = document.getElementById('hivesContainer');
         container.innerHTML = '';
         farmerData.hives.forEach(hive => {
-            const healthy = hive.health === '\u0938\u094D\u0935\u0938\u094D\u0925';
+            const healthy = hive.temp < 36;
             const bar = healthy ? 'from-green-500 to-green-600' : 'from-red-500 to-red-600';
-            const icon = healthy ? '&#x2705;' : '&#x26A0;&#xFE0F;';
             const card = document.createElement('div');
             card.className = 'hive-card bg-gray-800 rounded-2xl p-5 shadow-xl';
             card.innerHTML = `
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-xl font-bold text-white">&#x1F41D; \u0939\u093E\u0907\u0935 #${hive.id}</h3>
-                    <div class="text-2xl emoji">${icon}</div>
+                    <h3 class="text-xl font-bold text-white">&#x1F41D; Hive #${hive.id}</h3>
+                    <div class="text-2xl emoji">${hive.status}</div>
                 </div>
                 <div class="space-y-2 mb-4">
                     <div class="flex justify-between text-sm">
-                        <span class="text-gray-400">&#x1F36F; \u0936\u0939\u0926 \u0938\u094D\u0924\u0930:</span>
+                        <span class="text-gray-400">&#x1F36F; Honey Fill:</span>
                         <span class="font-bold text-white">${hive.honey}%</span>
                     </div>
                     <div class="w-full bg-gray-700 rounded-full h-2">
@@ -522,15 +462,15 @@
                 </div>
                 <div class="space-y-2 text-sm">
                     <div class="flex justify-between">
-                        <span class="text-gray-400">&#x1F321;&#xFE0F; \u0924\u093E\u092A\u092E\u093E\u0928:</span>
+                        <span class="text-gray-400">&#x1F321;&#xFE0F; Temperature:</span>
                         <span class="text-white">${hive.temp}&deg;C</span>
                     </div>
                     <div class="flex justify-between">
-                        <span class="text-gray-400">&#x1F4A7; \u0928\u092E\u0940:</span>
+                        <span class="text-gray-400">&#x1F4A7; Humidity:</span>
                         <span class="text-white">${hive.humidity}%</span>
                     </div>
                     <div class="flex justify-between">
-                        <span class="text-gray-400">&#x2764;&#xFE0F; \u0938\u094D\u0935\u093E\u0938\u094D\u0925\u094D\u092F:</span>
+                        <span class="text-gray-400">&#x2764;&#xFE0F; Health:</span>
                         <span class="text-white">${hive.health}</span>
                     </div>
                 </div>
@@ -540,12 +480,9 @@
         });
     }
 
-    function refreshHives() {
-        alert('&#x1F504; \u0939\u093E\u0907\u0935\u094D\u0938 \u0930\u093F\u092B\u094D\u0930\u0947\u0936 \u0939\u094B \u0917\u0908! \u0928\u092F\u093E \u0921\u0947\u091F\u093E \u0932\u094B\u0921; \u0939\u094B; \u0930\u0939\u093E \u0939\u0948! &#x1F41D;');
-        loadHives();
-    }
-
-    window.onload = function() { /* starts at language screen */ };
+    function reportHiveOk() { addBotMessage('&#x2705; Shukriya! Hive status record ho gaya. +10 Bee Credits mile!'); showScreen('chatScreen'); }
+    function reportHiveProblem() { addBotMessage('&#x26A0;&#xFE0F; Problem note ho gayi. KVIC officer ko alert bheja ja raha hai. Aapke nearest KVIC center se contact karein.'); showScreen('chatScreen'); }
+    function refreshHives() { alert('&#x1F504; Hives refresh ho gayi!'); loadHives(); }
 </script>
 </body>
 </html>
