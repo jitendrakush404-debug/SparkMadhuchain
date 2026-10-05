@@ -95,12 +95,13 @@
 
             <!-- Stats -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <!-- FIX 3: ~15,000 (Madhukranti number, misleading) → 450 (demo), subtitle updated -->
                 <div class="stat-card bg-white rounded-lg shadow-lg p-6 border-l-4 border-blue-500">
                     <div class="flex justify-between items-start">
                         <div>
                             <p class="text-gray-600 text-sm mb-1">Registered Farmers</p>
-                            <h3 class="text-3xl font-bold text-blue-600">~15,000</h3>
-                            <p class="text-gray-500 text-xs mt-2">Madhukranti (PIB, Oct 2025)</p>
+                            <h3 class="text-3xl font-bold text-blue-600">450 (demo)</h3>
+                            <p class="text-gray-500 text-xs mt-2">MadhuChain system data</p>
                         </div>
                         <div class="text-4xl emoji">&#x1F468;&#x200D;&#x1F33E;</div>
                     </div>
@@ -322,7 +323,8 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4"><p class="text-sm">Mathura, Uttar Pradesh</p></td>
-                            <td class="px-6 py-4"><p class="text-sm">5</p></td>
+                            <!-- FIX 1: 5 → 15 -->
+                            <td class="px-6 py-4"><p class="text-sm">15</p></td>
                             <td class="px-6 py-4"><span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold">250</span></td>
                             <td class="px-6 py-4"><span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold">&#x2705; Active</span></td>
                             <td class="px-6 py-4"><button class="text-blue-600 hover:text-blue-800 text-sm font-semibold" onclick="viewFarmerDetails('F001')">&#x1F441;&#xFE0F; View</button></td>
@@ -482,10 +484,11 @@
             <h2 class="text-3xl font-bold mb-6"><span class="emoji">&#x1F6A8;</span> AI Fraud &amp; Duplicate Scan Detection</h2>
 
             <!-- Auto-popup Fraud Alert Demo -->
+            <!-- FIX 6: A7K9M2 → B3C4D5 -->
             <div id="fraudAlertDemo" style="display:none;background:#fee2e2;border:1px solid #dc2626;
                 color:#7f1d1d;padding:16px;border-radius:12px;margin-bottom:16px;animation:pulse 2s infinite;">
                 <p class="font-bold text-lg">&#x26A0;&#xFE0F; SUSPICIOUS SCAN DETECTED — AUTO ALERT</p>
-                <p class="mt-2">Cap code <strong>A7K9M2</strong> scanned in <strong>Mumbai</strong> (10:02 AM) and <strong>Delhi</strong> (10:09 AM) — only 7 minutes apart.</p>
+                <p class="mt-2">Cap code <strong>B3C4D5</strong> scanned in <strong>Mumbai</strong> (10:02 AM) and <strong>Delhi</strong> (10:09 AM) — only 7 minutes apart.</p>
                 <p class="mt-1 text-sm">&#x1F4CD; 1,400+ km distance in 7 min = physically impossible. Code has been <strong>auto-blocked</strong>.</p>
                 <div class="flex gap-2 mt-3">
                     <button class="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">&#x1F6AB; Confirm Block</button>
@@ -494,21 +497,23 @@
             </div>
 
             <div class="space-y-4">
+                <!-- FIX 7: A7K9M2 → B3C4D5 -->
                 <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">
                     <div class="flex items-start justify-between">
                         <div>
                             <p class="font-bold text-red-700 text-lg">&#x26A0;&#xFE0F; Duplicate Scan — City Mismatch</p>
-                            <p class="text-gray-700 mt-2">Cap code <strong>A7K9M2</strong> scanned in Mumbai (10:02 AM) &amp; Delhi (10:09 AM) — 7 min apart, 1,400+ km.</p>
+                            <p class="text-gray-700 mt-2">Cap code <strong>B3C4D5</strong> scanned in Mumbai (10:02 AM) &amp; Delhi (10:09 AM) — 7 min apart, 1,400+ km.</p>
                             <p class="text-sm text-gray-500 mt-1">QR-2026-001237 | Code auto-blocked by system</p>
                         </div>
                         <span class="text-xs text-gray-500 whitespace-nowrap ml-4">18 hrs ago</span>
                     </div>
                 </div>
+                <!-- FIX 4: 38°C "Risk of colony collapse" → 42°C (above 38°C safe limit) -->
                 <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-lg">
                     <div class="flex items-start justify-between">
                         <div>
                             <p class="font-bold text-yellow-700 text-lg">&#x1F41D; Hive Temperature Alert</p>
-                            <p class="text-gray-700 mt-2">Farmer F001 (Ramesh Sharma, Mathura) — Hive #5 temperature 38&deg;C. Risk of colony collapse. 6-7 hives damaged = &#x20B9;14,000 season loss.</p>
+                            <p class="text-gray-700 mt-2">Farmer F001 (Ramesh Sharma, Mathura) — Hive #5 temperature 42&deg;C (above 38&deg;C safe limit). 6-7 hives damaged = &#x20B9;14,000 season loss.</p>
                         </div>
                         <span class="text-xs text-gray-500 whitespace-nowrap ml-4">1 hr ago</span>
                     </div>
@@ -604,10 +609,11 @@
     }
 
     function showNotifications() {
+        // FIX 5: 38°C → 42°C (same alert as Fraud Alerts card — kept in sync)
         alert(
             '&#x1F514; System Alerts (3):\n\n' +
             '&#x26A0;&#xFE0F; Suspicious QR scan — Mumbai + Delhi 7 min apart\n' +
-            '&#x1F41D; Hive #5 temp high — Ramesh Sharma, Mathura (38\u00B0C)\n' +
+            '&#x1F41D; Hive #5 temp high — Ramesh Sharma, Mathura (42\u00B0C)\n' +
             '&#x1F4BB; API response time high: 450ms'
         );
     }
@@ -628,7 +634,8 @@
 
     function viewFarmerDetails(farmerId) {
         const data = {
-            'F001': 'Ramesh Sharma\nLocation: Mathura, Uttar Pradesh\nHives: 5 | Bee Credits: 250\nAadhaar: XXXX-XXXX-4821\nStatus: \u2705 Active',
+            // FIX 2: Hives: 5 → Hives: 15
+            'F001': 'Ramesh Sharma\nLocation: Mathura, Uttar Pradesh\nHives: 15 | Bee Credits: 250\nAadhaar: XXXX-XXXX-4821\nStatus: \u2705 Active',
             'F002': 'Priya Singh\nLocation: Jaipur, Rajasthan\nHives: 12 | Bee Credits: 180\nAadhaar: XXXX-XXXX-5590\nStatus: \u2705 Active',
             'F003': 'Mohan Patel\nLocation: Ahmedabad, Gujarat\nHives: 8 | Bee Credits: 320\nAadhaar: XXXX-XXXX-3314\nStatus: \u2705 Active'
         };

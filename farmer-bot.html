@@ -99,20 +99,20 @@
         <div class="p-4 bg-gray-800 border-t border-gray-700">
             <div class="flex justify-around gap-2 mb-3">
                 <button class="quick-btn bg-gray-700 text-white px-3 py-2 rounded-xl text-xs font-semibold hover:bg-gray-600 transition flex-1"
-                    onclick="quickQuery('hives')">
-                    <span class="emoji">&#x1F41D;</span> &#x0939;&#x093E;&#x0907;&#x0935;
+                    id="btn-hives" onclick="quickQuery('hives')">
+                    &#x1F41D; <span id="label-hives">&#x0939;&#x093E;&#x0907;&#x0935;</span>
                 </button>
                 <button class="quick-btn bg-gray-700 text-white px-3 py-2 rounded-xl text-xs font-semibold hover:bg-gray-600 transition flex-1"
-                    onclick="quickQuery('credits')">
-                    <span class="emoji">&#x2B50;</span> &#x0915;&#x094D;&#x0930;&#x0947;&#x0921;&#x093F;&#x091F;
+                    id="btn-credits" onclick="quickQuery('credits')">
+                    &#x2B50; <span id="label-credits">&#x0915;&#x094D;&#x0930;&#x0947;&#x0921;&#x093F;&#x091F;</span>
                 </button>
                 <button class="quick-btn bg-gray-700 text-white px-3 py-2 rounded-xl text-xs font-semibold hover:bg-gray-600 transition flex-1"
-                    onclick="quickQuery('weather')">
-                    <span class="emoji">&#x1F326;&#xFE0F;</span> &#x092E;&#x094C;&#x0938;&#x092E;
+                    id="btn-weather" onclick="quickQuery('weather')">
+                    &#x1F326;&#xFE0F; <span id="label-weather">&#x092E;&#x094C;&#x0938;&#x092E;</span>
                 </button>
                 <button class="quick-btn bg-gray-700 text-white px-3 py-2 rounded-xl text-xs font-semibold hover:bg-gray-600 transition flex-1"
-                    onclick="quickQuery('help')">
-                    <span class="emoji">&#x2753;</span> &#x092E;&#x0926;&#x0926;
+                    id="btn-help" onclick="quickQuery('help')">
+                    &#x2753; <span id="label-help">&#x092E;&#x0926;&#x0926;</span>
                 </button>
             </div>
             <div class="flex items-center space-x-2">
@@ -122,7 +122,7 @@
                     placeholder="&#x0915;&#x0941;&#x091B; &#x092D;&#x0940; &#x092A;&#x0942;&#x091B;&#x0947;&#x0902;..."
                     type="text"/>
                 <button class="bg-orange-500 text-white px-5 py-3 rounded-xl font-semibold hover:bg-orange-600 transition"
-                    onclick="sendMessage()">
+                    onclick="sendMessage()" id="sendBtn">
                     &#x1F4E4;
                 </button>
             </div>
@@ -142,7 +142,7 @@
                 </button>
             </div>
 
-            <!-- Hive Status Report — farmer gives input -->
+            <!-- Hive Status Report -->
             <div class="bg-gray-800 rounded-xl p-4 mb-4 border border-orange-500">
                 <p class="text-orange-400 text-sm font-semibold mb-2">&#x1F4DD; Aaj ka hive theek hai?</p>
                 <div class="flex gap-2">
@@ -172,7 +172,8 @@
                 <div class="text-center">
                     <div class="text-5xl mb-2 emoji">&#x1F41D;</div>
                     <div class="text-xl mb-2">&#x092E;&#x0947;&#x0930;&#x0947; Bee Credits</div>
-                    <div class="text-6xl font-bold" id="totalCredits">95</div>
+                    <!-- FIX 1: 95 → 250 -->
+                    <div class="text-6xl font-bold" id="totalCredits">250</div>
                 </div>
             </div>
             <div class="space-y-4 mb-6">
@@ -221,6 +222,14 @@
                         <div class="text-sm text-gray-400">300 Credits</div>
                     </div>
                     <button class="bg-orange-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600">Redeem</button>
+                </div>
+                <!-- FIX 2: New DBT Transfer reward -->
+                <div class="flex justify-between items-center p-4 bg-green-900 bg-opacity-40 rounded-xl border border-green-600">
+                    <div>
+                        <div class="font-semibold text-white">&#x1F3E6; &#x20B9; DBT Transfer to Bank</div>
+                        <div class="text-sm text-gray-400">500 Credits — Aadhaar-linked bank account mein directly</div>
+                    </div>
+                    <button class="bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-green-700">Redeem</button>
                 </div>
             </div>
         </div>
@@ -324,20 +333,102 @@
 
 <script>
     let selectedLanguage = 'hindi';
+
+    // FIX 3: Language texts object
+    // FIX 7: Hindi responses me mix hue English words (hives, Bee Credits, Rewards, etc.)
+    //        ko pure Devanagari Hindi me translate kiya gaya hai, taaki "Hindi" select
+    //        karne par bot sach me Hindi me bole, Hinglish na lage.
+    const LANG = {
+        hindi: {
+            hiveLabel    : '&#x0939;&#x093E;&#x0907;&#x0935;',
+            creditsLabel : '&#x0915;&#x094D;&#x0930;&#x0947;&#x0921;&#x093F;&#x091F;',
+            weatherLabel : '&#x092E;&#x094C;&#x0938;&#x092E;',
+            helpLabel    : '&#x092E;&#x0926;&#x0926;',
+            placeholder  : '&#x0915;&#x0941;&#x091B; &#x092D;&#x0940; &#x092A;&#x0942;&#x091B;&#x0947;&#x0902;...',
+            weatherQuery : '&#x0906;&#x091C; &#x0915;&#x093E; &#x092E;&#x094C;&#x0938;&#x092E; &#x0915;&#x0948;&#x0938;&#x093E; &#x0939;&#x0948;?',
+            helpQuery    : '&#x092E;&#x0941;&#x091D;&#x0947; &#x092E;&#x0926;&#x0926; &#x091A;&#x093E;&#x0939;&#x093F;&#x090F;',
+            hiveResp     : '🐝 आपकी कुल 15 हाइव हैं!\n\n✅ 14 हाइव स्वस्थ हैं\n⚠️ 1 हाइव में तापमान अधिक है (42°C — 38°C सुरक्षित सीमा से ऊपर)\n\nयाद रखें: 6-7 हाइव नष्ट होने पर ₹14,000 का सीज़न नुकसान होता है.\n\nविस्तार के लिए "हाइव" बटन दबाएं!',
+            creditsResp  : '⭐ आपके पास 250 बी क्रेडिट्स हैं!\n\nकमाने के तरीके:\n✅ बॉटल सत्यापन: +5\n🐝 हाइव अपडेट: +10\n⛓️ ब्लॉकचेन सत्यापन: +20\n\nपुरस्कार:\n🏦 DBT बैंक ट्रांसफर: 500 क्रेडिट्स\n🚚 फ्री शिपिंग: 200 क्रेडिट्स',
+            weatherResp  : 'Mathura, Uttar Pradesh &#x0915;&#x093E; &#x0906;&#x091C; &#x0915;&#x093E; &#x092E;&#x094C;&#x0938;&#x092E; &#x1F326;&#xFE0F;\n\n&#x2600;&#xFE0F; &#x0938;&#x094D;&#x0925;&#x093F;&#x0924;&#x093F;: &#x0938;&#x093E;&#x092B;, &#x0939;&#x0932;&#x094D;&#x0915;&#x0940; &#x0927;&#x0942;&#x092A;\n&#x1F321;&#xFE0F; &#x0924;&#x093E;&#x092A;&#x092E;&#x093E;&#x0928;: 28.5&deg;C\n&#x1F4A7; &#x0928;&#x092E;&#x0940;: 65%\n&#x1F4A8; &#x0939;&#x0935;&#x093E;: 12 km/h\n&#x1F33B; &#x092B;&#x0938;&#x0932;: &#x0905;&#x091A;&#x094D;&#x091B;&#x0940; &#x0938;&#x094D;&#x0925;&#x093F;&#x0924;&#x093F;\n\n&#x1F41D; &#x092E;&#x0927;&#x0941;&#x092E;&#x0915;&#x094D;&#x0916;&#x093F;&#x092F;&#x094B;&#x0902; &#x0915;&#x0947; &#x0932;&#x093F;&#x090F; &#x0905;&#x091A;&#x094D;&#x091B;&#x093E; &#x0926;&#x093F;&#x0928; &#x0939;&#x0948;!',
+            helpResp     : '❓ मैं आपकी इन विषयों में मदद कर सकता हूँ:\n\n🐝 हाइव मॉनिटरिंग\n⭐ बी क्रेडिट्स जांच\n🌦️ मौसम जानकारी\n📊 मधुमक्खी पालन देखभाल सुझाव\n\nयाद रखें: मैं सिर्फ मधुमक्खी पालन संबंधी सलाह देता हूँ.',
+            defaultResp  : '🤖 मुझे समझ नहीं आया. क्या आप हाइव, मौसम, क्रेडिट्स या मधुमक्खी पालन के बारे में पूछना चाहते हैं?',
+            // FIX 8: naye fields — hive OK/Problem/Refresh ke liye pure Hindi text
+            hiveOkResp      : '✅ शुक्रिया! हाइव स्थिति दर्ज हो गई। +10 बी क्रेडिट्स मिले!',
+            hiveProblemResp : '⚠️ समस्या दर्ज हो गई। KVIC अधिकारी को सूचना भेजी जा रही है।',
+            refreshMsg      : '🔄 हाइव रिफ्रेश हो गईं!'
+        },
+        english: {
+            hiveLabel    : 'Hives',
+            creditsLabel : 'Credits',
+            weatherLabel : 'Weather',
+            helpLabel    : 'Help',
+            placeholder  : 'Ask anything...',
+            weatherQuery : 'What is today\'s weather?',
+            helpQuery    : 'I need help',
+            hiveResp     : '&#x1F41D; You have 15 hives total!\n\n&#x2705; 14 hives are healthy\n&#x26A0;&#xFE0F; 1 hive has high temperature (42&deg;C — above 38&deg;C safe limit)\n\nRemember: If 6-7 hives are damaged, season loss is &#x20B9;14,000.\n\nPress "Hives" button for details!',
+            creditsResp  : '&#x2B50; You have 250 Bee Credits!\n\nHow to earn:\n&#x2705; Bottle verified: +5\n&#x1F41D; Hive update: +10\n&#x26D3;&#xFE0F; Blockchain verify: +20\n\nRewards:\n&#x1F3E6; DBT Bank Transfer: 500 Credits\n&#x1F69A; Free Shipping: 200 Credits',
+            weatherResp  : 'Today\'s weather — Mathura, Uttar Pradesh &#x1F326;&#xFE0F;\n\n&#x2600;&#xFE0F; Condition: Clear, Light Sunshine\n&#x1F321;&#xFE0F; Temperature: 28.5&deg;C\n&#x1F4A7; Humidity: 65%\n&#x1F4A8; Wind: 12 km/h\n&#x1F33B; Crops: Good condition\n\n&#x1F41D; A good day for bees!',
+            helpResp     : '&#x2753; I can help you with:\n\n&#x1F41D; Hive monitoring\n&#x2B50; Bee Credits check\n&#x1F326;&#xFE0F; Weather info\n&#x1F4CA; Beekeeping care tips\n\nNote: I give strictly beekeeping advice only.',
+            defaultResp  : '&#x1F916; I did not understand. Would you like to ask about hives, weather, credits or beekeeping?',
+            // FIX 8
+            hiveOkResp      : '✅ Status recorded! +10 Bee Credits added!',
+            hiveProblemResp : '⚠️ Problem noted. Alert sent to KVIC officer.',
+            refreshMsg      : '🔄 Hives refreshed!'
+        },
+        hinglish: {
+            hiveLabel    : 'Meri Hives',
+            creditsLabel : 'Bee Credits',
+            weatherLabel : 'Mausam',
+            helpLabel    : 'Help Karo',
+            placeholder  : 'Kuch bhi poocho...',
+            weatherQuery : 'Aaj ka mausam kaisa hai?',
+            helpQuery    : 'Mujhe help chahiye',
+            hiveResp     : '&#x1F41D; Aapki total 15 hives hain!\n\n&#x2705; 14 hives bilkul theek hain\n&#x26A0;&#xFE0F; 1 hive ka temperature zyada hai (42&deg;C — safe limit 38&deg;C se upar)\n\nYaad rakhein: 6-7 hives damage hone par &#x20B9;14,000 ka season loss hota hai.\n\nDetails ke liye "Hives" button dabao!',
+            creditsResp  : '&#x2B50; Aapke paas 250 Bee Credits hain!\n\nKamaane ke tarike:\n&#x2705; Bottle verify: +5\n&#x1F41D; Hive update: +10\n&#x26D3;&#xFE0F; Blockchain verify: +20\n\nRewards:\n&#x1F3E6; DBT Bank Transfer: 500 Credits\n&#x1F69A; Free Shipping: 200 Credits',
+            weatherResp  : 'Mathura, UP ka aaj ka mausam &#x1F326;&#xFE0F;\n\n&#x2600;&#xFE0F; Condition: Saaf, Halki Dhoop\n&#x1F321;&#xFE0F; Temperature: 28.5&deg;C\n&#x1F4A7; Nami: 65%\n&#x1F4A8; Hawa: 12 km/h\n&#x1F33B; Fasal: Achhi sthiti\n\n&#x1F41D; Bees ke liye achha din hai!',
+            helpResp     : '&#x2753; Main aapki in chezon mein help kar sakta hoon:\n\n&#x1F41D; Hive monitoring\n&#x2B50; Bee Credits check\n&#x1F326;&#xFE0F; Mausam jankari\n&#x1F4CA; Beekeeping care tips\n\nYaad rakhein: Main sirf beekeeping advice deta hoon.',
+            defaultResp  : '&#x1F916; Mujhe samajh nahi aaya. Kya aap hives, mausam, credits ya beekeeping ke baare mein poochna chahte hain?',
+            // FIX 8
+            hiveOkResp      : '✅ Shukriya! Hive status record ho gaya. +10 Bee Credits mile!',
+            hiveProblemResp : '⚠️ Problem note ho gayi. KVIC officer ko alert bheja ja raha hai.',
+            refreshMsg      : '🔄 Hives refresh ho gayi!'
+        }
+    };
+
+    // FIX 4: Update UI when language selected
+    function updateUI(lang) {
+        const L = LANG[lang];
+        document.getElementById('label-hives').innerHTML   = L.hiveLabel;
+        document.getElementById('label-credits').innerHTML = L.creditsLabel;
+        document.getElementById('label-weather').innerHTML = L.weatherLabel;
+        document.getElementById('label-help').innerHTML    = L.helpLabel;
+        document.getElementById('messageInput').placeholder = L.placeholder;
+    }
+
     let farmerData = {
         name: 'Ramesh Sharma',
         farmerId: 'F001',
         location: 'Mathura, Uttar Pradesh',
-        totalHives: 5,
-        beeCredits: 95,
+        totalHives: 15,
+        beeCredits: 250,
         hives: [
-            { id:1, honey:80, temp:32, humidity:65, health:'&#x0938;&#x094D;&#x0935;&#x0938;&#x094D;&#x0925;', status:'&#x2705;', alert:null },
-            { id:2, honey:95, temp:31, humidity:63, health:'&#x0938;&#x094D;&#x0935;&#x0938;&#x094D;&#x0925;', status:'&#x2705;', alert:null },
-            { id:3, honey:60, temp:31, humidity:64, health:'&#x0938;&#x094D;&#x0935;&#x0938;&#x094D;&#x0925;', status:'&#x2705;', alert:null },
-            { id:4, honey:45, temp:33, humidity:66, health:'&#x0938;&#x094D;&#x0935;&#x0938;&#x094D;&#x0925;', status:'&#x2705;', alert:null },
-            { id:5, honey:50, temp:38, humidity:70, health:'&#x0927;&#x094D;&#x092F;&#x093E;&#x0928; &#x0926;&#x0947;&#x0902;',
+            { id:1,  honey:80, temp:32, humidity:65, health:'&#x0938;&#x094D;&#x0935;&#x0938;&#x094D;&#x0925;', status:'&#x2705;', alert:null },
+            { id:2,  honey:95, temp:31, humidity:63, health:'&#x0938;&#x094D;&#x0935;&#x0938;&#x094D;&#x0925;', status:'&#x2705;', alert:null },
+            { id:3,  honey:60, temp:31, humidity:64, health:'&#x0938;&#x094D;&#x0935;&#x0938;&#x094D;&#x0925;', status:'&#x2705;', alert:null },
+            { id:4,  honey:45, temp:33, humidity:66, health:'&#x0938;&#x094D;&#x0935;&#x0938;&#x094D;&#x0925;', status:'&#x2705;', alert:null },
+            { id:5,  honey:70, temp:32, humidity:64, health:'&#x0938;&#x094D;&#x0935;&#x0938;&#x094D;&#x0925;', status:'&#x2705;', alert:null },
+            { id:6,  honey:85, temp:31, humidity:63, health:'&#x0938;&#x094D;&#x0935;&#x0938;&#x094D;&#x0925;', status:'&#x2705;', alert:null },
+            { id:7,  honey:55, temp:33, humidity:65, health:'&#x0938;&#x094D;&#x0935;&#x0938;&#x094D;&#x0925;', status:'&#x2705;', alert:null },
+            { id:8,  honey:90, temp:31, humidity:62, health:'&#x0938;&#x094D;&#x0935;&#x0938;&#x094D;&#x0925;', status:'&#x2705;', alert:null },
+            { id:9,  honey:65, temp:32, humidity:64, health:'&#x0938;&#x094D;&#x0935;&#x0938;&#x094D;&#x0925;', status:'&#x2705;', alert:null },
+            { id:10, honey:78, temp:31, humidity:63, health:'&#x0938;&#x094D;&#x0935;&#x0938;&#x094D;&#x0925;', status:'&#x2705;', alert:null },
+            { id:11, honey:82, temp:32, humidity:65, health:'&#x0938;&#x094D;&#x0935;&#x0938;&#x094D;&#x0925;', status:'&#x2705;', alert:null },
+            { id:12, honey:74, temp:33, humidity:66, health:'&#x0938;&#x094D;&#x0935;&#x0938;&#x094D;&#x0925;', status:'&#x2705;', alert:null },
+            { id:13, honey:68, temp:32, humidity:64, health:'&#x0938;&#x094D;&#x0935;&#x0938;&#x094D;&#x0925;', status:'&#x2705;', alert:null },
+            { id:14, honey:88, temp:31, humidity:63, health:'&#x0938;&#x094D;&#x0935;&#x0938;&#x094D;&#x0925;', status:'&#x2705;', alert:null },
+            { id:15, honey:50, temp:42, humidity:70, health:'&#x0927;&#x094D;&#x092F;&#x093E;&#x0928; &#x0926;&#x0947;&#x0902;',
               status:'&#x26A0;&#xFE0F;',
-              alert:'&#x26A0;&#xFE0F; &#x0924;&#x093E;&#x092A;&#x092E;&#x093E;&#x0928; &#x0905;&#x0927;&#x093F;&#x0915; &#x0939;&#x0948;! 6-7 hives damage hone par &#x20B9;14,000 season loss hota hai. Abhi dhyan den (38&deg;C)' }
+              alert:'&#x26A0;&#xFE0F; Temperature 42&deg;C — 38&deg;C safe limit se upar! 6-7 hives damage hone par &#x20B9;14,000 season loss hota hai. Abhi dhyan den!' }
         ]
     };
 
@@ -350,21 +441,25 @@
 
     function selectLanguage(lang) {
         selectedLanguage = lang;
+        updateUI(lang);
         showScreen('chatScreen');
         addBotMessage(getWelcomeMessage(lang));
     }
 
     function getWelcomeMessage(lang) {
         const msgs = {
-            hindi: '&#x1F64F; Namaste Ramesh Sharma ji!\n\nMain aapki MadhuChain AI assistant hoon. &#x1F41D;\nMain sirf madhumakhi palan ki baatein karta hoon.\n\n&#x1F31F; Aap pooch sakte hain:\n&#x2022; Meri hives kaisi hain?\n&#x2022; Aaj ka mausam kaisa hai?\n&#x2022; Mere Bee Credits kitne hain?\n\nChalie shuru karte hain! &#x1F680;\n\n&#x2139;&#xFE0F; AI: Ollama + Qwen 2.5 (self-hosted)',
-            english: '&#x1F44B; Hello Ramesh Sharma!\n\nI am your MadhuChain AI assistant. &#x1F41D;\nI give strictly beekeeping advice only.\n\n&#x1F31F; You can ask:\n&#x2022; How are my hives?\n&#x2022; What is today\'s weather risk?\n&#x2022; How many Bee Credits do I have?\n\nLet us start! &#x1F680;\n\n&#x2139;&#xFE0F; AI: Ollama + Qwen 2.5 (self-hosted)',
-            hinglish: '&#x1F44B; Hello Ramesh Sharma ji!\n\nMain aapki MadhuChain AI assistant hoon. &#x1F41D;\nMain sirf beekeeping advice deta hoon.\n\n&#x1F31F; Aap pooch sakte hain:\n&#x2022; Meri hives kaisi hain?\n&#x2022; Aaj ka mausam?\n&#x2022; Bee Credits kitne hain?\n\nLet us start! &#x1F680;\n\n&#x2139;&#xFE0F; AI: Ollama + Qwen 2.5 (self-hosted)'
+            // FIX 7: Hindi welcome message me "Namaste", "hives", "Bee Credits" jaise
+            // English words Devanagari me translate kiye — ab pura Hindi hai
+            hindi:    '🙏 नमस्ते Ramesh Sharma जी!\n\nमैं आपकी MadhuChain AI असिस्टेंट हूँ. 🐝\nमैं सिर्फ मधुमक्खी पालन की बातें करता हूँ.\n\n🌟 आप पूछ सकते हैं:\n• मेरी हाइव कैसी हैं?\n• आज का मौसम कैसा है?\n• मेरे बी क्रेडिट्स कितने हैं?\n\nचलिए शुरू करते हैं! 🚀\n\nℹ️ AI: Ollama + Qwen 2.5 (self-hosted)',
+            english:  '&#x1F44B; Hello Ramesh Sharma!\n\nI am your MadhuChain AI assistant. &#x1F41D;\nI give strictly beekeeping advice only.\n\n&#x1F31F; You can ask:\n&#x2022; How are my hives?\n&#x2022; What is today\'s weather risk?\n&#x2022; How many Bee Credits do I have?\n\nLet us start! &#x1F680;\n\n&#x2139;&#xFE0F; AI: Ollama + Qwen 2.5 (self-hosted)',
+            hinglish: '&#x1F44B; Hello Ramesh Sharma ji!\n\nMain aapki MadhuChain AI assistant hoon. &#x1F41D;\nMain sirf beekeeping advice deta hoon.\n\n&#x1F31F; Aap pooch sakte hain:\n&#x2022; Meri hives kaisi hain?\n&#x2022; Aaj ka mausam kaisa hai?\n&#x2022; Mere Bee Credits kitne hain?\n\nChalo shuru karte hain! &#x1F680;\n\n&#x2139;&#xFE0F; AI: Ollama + Qwen 2.5 (self-hosted)'
         };
         return msgs[lang];
     }
 
     function changeLanguage(lang) {
         selectedLanguage = lang;
+        updateUI(lang);
         alert('&#x2705; Language changed to ' + lang);
     }
 
@@ -412,37 +507,43 @@
     function quickQuery(type) {
         if (type === 'hives')   { showScreen('hiveDetails');   return; }
         if (type === 'credits') { showScreen('creditsDetail'); return; }
+
+        // FIX 5: Language-aware quick query messages
+        const L = LANG[selectedLanguage];
         const queries = {
-            weather: '&#x1F326;&#xFE0F; Aaj ka mausam kaisa hai?',
-            help: '&#x2753; Mujhe madad chahiye'
+            weather: L.weatherQuery,
+            help   : L.helpQuery
         };
         addUserMessage(queries[type]);
         showTyping();
         setTimeout(() => { hideTyping(); addBotMessage(getBotResponse(type)); }, 1500);
     }
 
+    // FIX 6: Language-aware bot responses
     function getBotResponse(query) {
         const q = query.toLowerCase();
-        if (q.includes('hive') || q.includes('&#x0939;&#x093E;&#x0907;&#x0935;')) {
-            return '&#x1F41D; Aapki kul 5 hives hain!\n\n&#x2705; 4 hives swasth hain\n&#x26A0;&#xFE0F; 1 hive ka temperature zyada hai (38&deg;C)\n\nYaad rahein: 6-7 hives damage hone par &#x20B9;14,000 season loss hota hai.\n\nDetail ke liye "Hive" button dabaen!';
+        const L = LANG[selectedLanguage];
+
+        if (q.includes('hive') || q === 'hives') {
+            return L.hiveResp;
         }
-        if (q.includes('credit') || q.includes('&#x0915;&#x094D;&#x0930;&#x0947;&#x0921;&#x093F;&#x091F;')) {
-            return '&#x2B50; Aapke paas 95 Bee Credits hain!\n\n&#x0915;&#x092E;&#x093E;&#x0928;&#x0947; &#x0915;&#x0947; &#x0924;&#x0930;&#x0940;&#x0915;&#x0947;:\n&#x2705; Bottle verify: +5\n&#x1F41D; Hive update: +10\n&#x26D3;&#xFE0F; Blockchain verify: +20\n\nRewards:\n&#x1F69A; Free Shipping: 200 Credits\n&#x1F6CD;&#xFE0F; Discount: 500 Credits';
+        if (q.includes('credit') || q.includes('credits')) {
+            return L.creditsResp;
         }
-        if (q.includes('weather') || q.includes('&#x092E;&#x094C;&#x0938;&#x092E;')) {
-            return 'Mathura, Uttar Pradesh ka aaj ka mausam &#x1F326;&#xFE0F;\n\n&#x2600;&#xFE0F; Condition: Saaf, Halki Dhoop\n&#x1F321;&#xFE0F; Temperature: 28.5&deg;C\n&#x1F4A7; Nami: 65%\n&#x1F4A8; Hawa: 12 km/h\n&#x1F33B; Fasal: Achhi Sthiti\n\n&#x1F41D; Madhumakkhiyon ke liye achha din hai!';
+        if (q.includes('weather') || q.includes('mausam') || q === 'weather') {
+            return L.weatherResp;
         }
         if (q.includes('help') || q === 'help') {
-            return '&#x2753; Main aapki in vishyon mein madad kar sakta hoon:\n\n&#x1F41D; Hive monitoring\n&#x2B50; Bee Credits check\n&#x1F326;&#xFE0F; Mausam jankari\n&#x1F4CA; Beekeeping care tips\n\nYaad rakhein: Main sirf beekeeping advice deta hoon. &#x1F41D;';
+            return L.helpResp;
         }
-        return '&#x1F916; Mujhe samajh nahi aaya. Kya aap hive, mausam, credits ya beekeeping ke baare mein poochna chahte hain?';
+        return L.defaultResp;
     }
 
     function loadHives() {
         const container = document.getElementById('hivesContainer');
         container.innerHTML = '';
         farmerData.hives.forEach(hive => {
-            const healthy = hive.temp < 36;
+            const healthy = hive.temp < 38;
             const bar = healthy ? 'from-green-500 to-green-600' : 'from-red-500 to-red-600';
             const card = document.createElement('div');
             card.className = 'hive-card bg-gray-800 rounded-2xl p-5 shadow-xl';
@@ -480,9 +581,14 @@
         });
     }
 
-    function reportHiveOk() { addBotMessage('&#x2705; Shukriya! Hive status record ho gaya. +10 Bee Credits mile!'); showScreen('chatScreen'); }
-    function reportHiveProblem() { addBotMessage('&#x26A0;&#xFE0F; Problem note ho gayi. KVIC officer ko alert bheja ja raha hai. Aapke nearest KVIC center se contact karein.'); showScreen('chatScreen'); }
-    function refreshHives() { alert('&#x1F504; Hives refresh ho gayi!'); loadHives(); }
+    // FIX 9: reportHiveOk(), reportHiveProblem() aur refreshHives() ab
+    // selectedLanguage ke hisaab se LANG object se sahi text lete hain.
+    // Pehle reportHiveOk() sirf hacky check (`includes('did not')`) karta tha
+    // jo Hindi select karne par bhi Hinglish dikhata tha, aur reportHiveProblem()/
+    // refreshHives() hamesha hardcoded Hinglish dikhate the — ab teeno fix hain.
+    function reportHiveOk()      { addBotMessage(LANG[selectedLanguage].hiveOkResp); showScreen('chatScreen'); }
+    function reportHiveProblem() { addBotMessage(LANG[selectedLanguage].hiveProblemResp); showScreen('chatScreen'); }
+    function refreshHives()      { alert(LANG[selectedLanguage].refreshMsg); loadHives(); }
 </script>
 </body>
 </html>
