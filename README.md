@@ -156,6 +156,12 @@ A **₹0/month** decentralized ecosystem offering:
 
 ---
 
+| Code base | Application | Product Demo |
+| :--- | :--- | :--- |
+| [📂 GitHub Repo](https://github.com/jitendrakush404-debug/SparkMadhuchain) | [🌐 Live Demo](https://jitendrakush404-debug.github.io/SparkMadhuchain/) | [🎥 Video Playlist](https://youtube.com/playlist?list=PLT9z1Ougu2Ao&si=4tfzDoj4Iwl09jw9) |
+
+---
+
 *Phase 2 simulated prototype built for SIH 2026. Not an official KVIC / MSME product.*
 
 © 2026 MadhuChain — Team Spark Innovator
